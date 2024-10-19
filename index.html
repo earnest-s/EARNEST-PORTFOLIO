@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnest Portfolio</title>
+    <!-- Link to the local style.css file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section with Navigation -->
+    <header>
+        <h1>Welcome to Earnest's Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#about" aria-label="Learn more about Earnest">About Me</a></li>
+                <li><a href="#projects" aria-label="Explore my projects">Projects</a></li>
+                <li><a href="#skills" aria-label="Check out my skills">Skills</a></li>
+                <li><a href="#contact" aria-label="Contact Earnest">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello! I am Earnest, a student pursuing Artificial Intelligence and Data Science. I am passionate about exploring how AI can shape the future.</p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <p>Here are some of the exciting projects I've worked on:</p>
+        <ol>
+            <li>IoT-based remote health monitoring system for bed patients.</li>
+            <li>Data visualization for climate change.</li>
+            <li>Predictive modeling for watering plants.</li>
+        </ol>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>AI in IoT.</li>
+            <li>Data Analysis & Visualization using Power BI and Tableau.</li>
+            <li>Python, Java, C.</li>
+        </ul>
+    </section>
+
+    <!-- Contact Section with Form -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>If you'd like to get in touch, please fill out the form below:</p>
+        
+        <form action="your_form_processing_script.php" method="POST">
+            <!-- Name Field -->
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+            <!-- Phone Field -->
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+
+            <!-- Email Field -->
+            <label for="email">Your Gmail:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your Gmail">
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Earnest. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

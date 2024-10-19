@@ -1,0 +1,98 @@
+/* General styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Section */
+header {
+    padding: 20px;
+    text-align: center;
+    background-color: #333; /* Dark gray background for header */
+}
+
+header h1 {
+    color: white;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: #f1f1f1; /* Light grey for links */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
+nav a:hover {
+    color: #4CAF50; /* Green on hover for better visibility */
+}
+
+/* About Section */
+section {
+    padding: 20px;
+    margin: 20px;
+}
+
+section#about {
+    background-color: #444; /* Slightly lighter dark background for the About section */
+}
+
+section h2 {
+    color: #4CAF50; /* Green color for section headings */
+}
+
+/* Contact Form Styles */
+form {
+    background-color: #555;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: auto;
+}
+
+form label {
+    color: #ddd;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+form input[type="text"],
+form input[type="tel"],
+form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #222;
+    color: white;
+}
+
+form button {
+    background-color: #4CAF50; /* Green submit button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
