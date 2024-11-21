@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: black;
@@ -8,50 +9,54 @@ body {
     animation: fadeIn 2s ease-in-out;
 }
 
-header {
-    padding: 20px;
-    text-align: center;
-    background-color: #333;
+/* Time and Date Container */
+#dateTimeContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    animation: slideIn 1.5s ease-out;
 }
 
-header h1 {
-    color: white;
+#dateTimeContainer div {
+    font-size: 18px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#time {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
     animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
     0% {
-        text-shadow: 0 0 10px #4CAF50, 0 0 20px #4CAF50;
+        text-shadow: 0 0 5px #4CAF50, 0 0 10px #4CAF50;
     }
     100% {
         text-shadow: 0 0 20px #4CAF50, 0 0 30px #4CAF50;
     }
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav a {
-    color: #f1f1f1;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-    transition: transform 0.3s, color 0.3s;
-}
-
-nav a:hover {
-    color: #4CAF50;
-    transform: scale(1.1);
-}
-
+/* Section Styles */
 section {
     padding: 20px;
     margin: 20px;
@@ -71,25 +76,9 @@ section {
     }
 }
 
-form {
-    background-color: #555;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    margin: auto;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
-
-form input, form button {
-    margin: 10px 0;
-}
-
-.hidden {
-    display: none;
-}
-
-#formMessage {
-    margin-top: 10px;
-    color: #4CAF50;
+/* Footer */
+footer {
     text-align: center;
+    padding: 10px;
+    background: #333;
 }
