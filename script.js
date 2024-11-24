@@ -1,4 +1,4 @@
-// Update Time and Date
+// Time and Date Update
 function updateDateTime() {
     const now = new Date();
 
@@ -7,25 +7,22 @@ function updateDateTime() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const time = `${hours}:${minutes}:${seconds}`;
-    document.getElementById('time').textContent = time;
+    document.getElementById('time').innerHTML = time;
 
     // Date
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const months = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    const day = days[now.getDay()];
-    const month = months[now.getMonth()];
-    const date = now.getDate();
-    const year = now.getFullYear();
-    const fullDate = `${day}, ${month} ${date}, ${year}`;
-    document.getElementById('date').textContent = fullDate;
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const fullDate = now.toLocaleDateString('en-US', options);
+    document.getElementById('date').innerHTML = fullDate;
 }
 
-// Call the update function every second
 setInterval(updateDateTime, 1000);
 updateDateTime();
+
+// Dark Mode Toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('change', () => {
+    document.body.classList.toggle('light-mode');
+});
 
 // Contact Form Handling
 document.getElementById('contactForm').addEventListener('submit', function (e) {
