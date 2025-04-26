@@ -1,97 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earnest Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Earnest | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Earnest's Portfolio - Data Analyst | AI Enthusiast | IoT Developer. View my work and connect with me!">
+  <meta name="keywords" content="Earnest, Data Analyst, AI, Portfolio, IoT Developer, Power BI, Python, SQL">
+  <meta name="author" content="Earnest">
 </head>
+
 <body>
-    <!-- Dark Mode Toggle -->
-    <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button>
-    
-    <!-- Time and Date Display -->
-    <div id="dateTimeContainer">
-        <div id="time"></div>
-        <div id="date"></div>
+
+  <!-- Loading Screen -->
+  <div id="loading">
+    <div class="bouncing-loader">
+      <div></div><div></div><div></div>
     </div>
+  </div>
 
-    <!-- Header Section -->
-    <header>
-        <h1>Welcome to <span>Earnest's Portfolio</span></h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact Me</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I am Earnest, a student pursuing Artificial Intelligence and Data Science. I am passionate about exploring how AI can shape the future.</p>
-    </section>
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="nav-logo">Earnest</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button id="modeToggle" aria-label="Toggle Dark/Light Mode">🌓</button>
+  </nav>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project-list">
-            <div class="project-item">
-                <h3>IoT-based Remote Health Monitoring</h3>
-                <p>An innovative system for real-time patient monitoring using IoT devices.</p>
-            </div>
-            <div class="project-item">
-                <h3>Data Visualization for Climate Change</h3>
-                <p>Interactive visualizations to understand global warming trends.</p>
-            </div>
-            <div class="project-item">
-                <h3>Predictive Modeling for Plant Watering</h3>
-                <p>AI models to optimize irrigation for home gardens.</p>
-            </div>
-        </div>
-    </section>
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1>Hi, I'm <span>Earnest</span> 👋</h1>
+      <h2><span class="typing"></span></h2>
+      <div class="hero-buttons">
+        <a href="#projects" class="cta-button">View My Work</a>
+        <a href="assets/Earnest_Resume.pdf" class="cta-button" download>Download Resume</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>Skills</h2>
-        <div class="skill-list">
-            <span>AI in IoT</span>
-            <span>Data Analysis & Visualization</span>
-            <span>Power BI</span>
-            <span>Tableau</span>
-            <span>Python</span>
-            <span>Java</span>
-            <span>C Programming</span>
-        </div>
-    </section>
+  <!-- Wavy Divider -->
+  <div class="custom-shape-divider-bottom">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.68,22.34,103.46,29.55,158.68,17.24,70-15.92,136.24-53.58,206-48.11,58,4.47,111.17,35.41,167,50.4C628.39,84,684.51,77.79,741,62c53.87-15,104.36-35.59,158-40.22,55-4.76,112,8.14,162,32V0Z" fill="#0d0d0d"></path>
+    </svg>
+  </div>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <form id="contactForm">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required placeholder="Enter your name">
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I am Earnest, a passionate Data Analyst and AI enthusiast transforming data into real-world impact. Skilled in Python, SQL, IoT systems, chatbot development, and data visualization.</p>
+  </section>
 
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+  <!-- Wavy Divider -->
+  <div class="custom-shape-divider-bottom">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.68,22.34,103.46,29.55,158.68,17.24,70-15.92,136.24-53.58,206-48.11,58,4.47,111.17,35.41,167,50.4C628.39,84,684.51,77.79,741,62c53.87-15,104.36-35.59,158-40.22,55-4.76,112,8.14,162,32V0Z" fill="#0d0d0d"></path>
+    </svg>
+  </div>
 
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-list">
+      <div class="project-card">
+        <h3>IoT Patient Health Monitoring</h3>
+        <p>Developed a robust IoT system enabling 24/7 remote monitoring of bedridden patients' vital signs, improving emergency response times by 40%.</p>
+        <a href="https://github.com/snipergib" target="_blank" class="github-btn">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>AI Chatbot using Google Gemini API (In Progress)</h3>
+        <p>Building an advanced conversational chatbot with real-time NLP and modern UI to enhance user experience.</p>
+        <a href="https://github.com/snipergib" target="_blank" class="github-btn">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>Intelligent Crop Monitoring</h3>
+        <p>Created a full-stack system using IoT sensors, Python ETL, and Power BI dashboards to boost crop yield predictions by 25%.</p>
+        <a href="https://github.com/snipergib" target="_blank" class="github-btn">View on GitHub</a>
+      </div>
+    </div>
+  </section>
 
-            <button type="submit">Submit</button>
-        </form>
-        <p id="formMessage" class="hidden"></p>
-    </section>
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill-list">
+      <span class="skill-badge">Python</span>
+      <span class="skill-badge">SQL & PostgreSQL</span>
+      <span class="skill-badge">Power BI</span>
+      <span class="skill-badge">Tableau</span>
+      <span class="skill-badge">IoT (Raspberry Pi, Arduino)</span>
+      <span class="skill-badge">Git & GitHub</span>
+      <span class="skill-badge">VS Code</span>
+    </div>
+  </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 Earnest. All Rights Reserved.</p>
-    </footer>
+  <!-- Certifications Section -->
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <ul>
+      <li>Git & GitHub – Geekster (2025)</li>
+      <li>Introduction to IoT – Cisco (2024)</li>
+      <li>Power BI Visualization – Infosys Springboard (2023)</li>
+    </ul>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div id="snackbar">Message Sent Successfully!</div>
+    <div class="social-links">
+      <a href="https://github.com/snipergib" target="_blank">GitHub</a> |
+      <a href="https://www.linkedin.com/in/earnest-s-7039b0287" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Earnest. Copyrights ©</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Go to top">⬆️</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="js/script.js"></script>
+
 </body>
 </html>
