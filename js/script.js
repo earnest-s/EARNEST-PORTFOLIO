@@ -1,90 +1,92 @@
-// Loading Screen
-window.addEventListener('load', () => {
-    document.getElementById('loading').style.display = 'none';
-});
+// Typing Animation
+const textArray = [
+  "Turning Data into Insights...",
+  "Data Analyst | IoT Enthusiast",
+  "Building AI Solutions"
+];
+let typingIndex = 0;
+let charIndex = 0;
+const typingText = document.getElementById("typing-text");
 
-// Typed.js Typing Effect
-var typed = new Typed('.typing', {
-    strings: ["Data Analyst", "AI Enthusiast", "IoT Developer", "Creative Thinker"],
-    typeSpeed: 80,
-    backSpeed: 50,
-    loop: true
-});
+function typeText() {
+  if (charIndex < textArray[typingIndex].length) {
+    typingText.textContent += textArray[typingIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeText, 100);
+  } else {
+    setTimeout(eraseText, 2000);
+  }
+}
 
-// ScrollReveal Animations for Sections and Titles
-ScrollReveal().reveal('section', {
-    duration: 1200,
-    origin: 'bottom',
-    distance: '70px',
-    easing: 'ease-in-out',
-    reset: false,
-    opacity: 0,
-    scale: 0.9,
-    viewFactor: 0.2
-});
+function eraseText() {
+  if (charIndex > 0) {
+    typingText.textContent = textArray[typingIndex].substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(eraseText, 50);
+  } else {
+    typingIndex = (typingIndex + 1) % textArray.length;
+    setTimeout(typeText, 500);
+  }
+}
 
-ScrollReveal().reveal('h2', {
-    duration: 1000,
-    origin: 'top',
-    distance: '30px',
-    delay: 200,
-    reset: false
-});
+// Apply Theme (dark/light) from localStorage or system preference
+function applyTheme(savedTheme = null) {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = savedTheme || localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
+  document.body.classList.toggle("dark", theme === "dark");
+  document.getElementById("theme-toggle").textContent = theme === "dark" ? "☀️" : "🌙";
+}
 
-// tsParticles Background
-tsParticles.load("particles-js", {
-    fullScreen: { enable: false },
-    particles: {
-        number: { value: 80 },
-        color: { value: "#4caf50" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: { min: 1, max: 5 } },
-        move: { enable: true, speed: 1 },
-        links: { enable: true, distance: 150, color: "#4caf50", opacity: 0.4 }
+// Smooth Page Transition on Link Click
+function setupPageTransitions() {
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (link.getAttribute('target') !== '_blank' && !link.getAttribute('href').startsWith('#')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300); // matches fade-out transition
+      });
     }
+  });
+}
+
+// Loader Spinner Hide After Page Load
+function hideLoader() {
+  const loader = document.getElementById("loader");
+  if (loader) {
+    loader.style.display = "none";
+  }
+}
+
+// Initialize Everything
+document.addEventListener("DOMContentLoaded", () => {
+  // Typing animation
+  if (typingText) {
+    setTimeout(typeText, 1000);
+  }
+
+  // Theme setup
+  applyTheme();
+  
+  // Theme toggle button
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const newTheme = document.body.classList.contains("dark") ? "light" : "dark";
+      localStorage.setItem("theme", newTheme);
+      applyTheme(newTheme);
+    });
+  }
+
+  // Page fade-in
+  document.body.classList.add("fade-in");
+
+  // Setup page transitions
+  setupPageTransitions();
 });
 
-// Dark/Light Mode Toggle
-const modeToggle = document.getElementById('modeToggle');
-modeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-});
-
-// Dynamic Navbar Background on Scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = "rgba(0,0,0,0.9)";
-    } else {
-        navbar.style.background = "rgba(0,0,0,0.6)";
-    }
-});
-
-// Back to Top Button
-const backToTop = document.getElementById("backToTop");
-
-window.onscroll = function() {
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-        backToTop.style.display = "block";
-    } else {
-        backToTop.style.display = "none";
-    }
-};
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Snackbar on Form Submit
-const contactForm = document.getElementById('contactForm');
-const snackbar = document.getElementById('snackbar');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    snackbar.className = "show";
-    setTimeout(() => {
-        snackbar.className = snackbar.className.replace("show", "");
-    }, 3000);
-    contactForm.reset();
-});
+// Loader hide after full window load
+window.addEventListener("load", hideLoader);
