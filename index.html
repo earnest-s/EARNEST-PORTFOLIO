@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="assets/favicon.ico" type="image/png">
-    <meta name="description" content="Portfolio of Earnest S. - Data Analyst with expertise in IoT, AI, and data visualization.">
-<meta name="keywords" content="Earnest, Data Analyst, AI, IoT, Python, Power BI, Portfolio, SQL, Projects">
-<meta name="author" content="Earnest S.">
-<meta property="og:title" content="Earnest S. | Data Analyst Portfolio">
-<meta property="og:description" content="Explore the work of Earnest, a Data Analyst and AI Enthusiast focused on building impactful projects.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourdomain.com"> <!-- Replace with real URL -->
-<meta property="og:image" content="https://yourdomain.com/preview-image.jpg"> <!-- Optional thumbnail -->
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Earnest S. | Data Analyst Portfolio</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+
+  <!-- SEO -->
+  <meta name="description" content="Portfolio of Earnest S. - Data Analyst with expertise in IoT, AI, and data visualization.">
+  <meta name="keywords" content="Earnest, Data Analyst, AI, IoT, Python, Power BI, Portfolio, SQL, Projects">
+  <meta name="author" content="Earnest S.">
+  <meta property="og:title" content="Earnest S. | Data Analyst Portfolio">
+  <meta property="og:description" content="Explore the work of Earnest, a Data Analyst and AI Enthusiast focused on building impactful projects.">
+  <meta property="og:type" content="website">
+
+  <!-- Styles & Fonts -->
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Scripts -->
   <script defer src="js/script.js"></script>
 </head>
-<body>
-    <div id="loader">
-  <div class="spinner"></div>
-</div>
+<body class="fade-in">
+  <!-- Page Loader -->
+  <div id="loader">
+    <div class="spinner" role="status" aria-label="Loading page..."></div>
+  </div>
 
+  <!-- Header -->
   <header class="header">
     <div class="container">
       <h1 class="logo">Earnest S.</h1>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
-        <button id="theme-toggle">🌙</button>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
       </nav>
     </div>
   </header>
 
+  <!-- Hero Section -->
   <main class="hero">
     <div class="container">
       <h2 class="hero-title">Hi, I'm Earnest 👋</h2>
-      <p id="typing-text" class="hero-subtitle"></p>
+      <p id="typing-text" class="hero-subtitle" aria-live="polite"></p>
       <div class="hero-buttons">
         <a href="assets/Earnest_Resume.pdf" download class="btn primary">📥 Download Resume</a>
         <a href="assets/Earnest_Resume.pdf" target="_blank" class="btn outline">👁️ View Resume</a>
@@ -47,6 +53,7 @@
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p>&copy; 2025 Earnest S. | <a href="mailto:earni8105@gmail.com">earni8105@gmail.com</a></p>

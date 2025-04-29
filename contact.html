@@ -1,63 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <link rel="icon" href="assets/favicon.ico" type="image/png">
-    <meta name="description" content="Portfolio of Earnest S. - Data Analyst with expertise in IoT, AI, and data visualization.">
-<meta name="keywords" content="Earnest, Data Analyst, AI, IoT, Python, Power BI, Portfolio, SQL, Projects">
-<meta name="author" content="Earnest S.">
-<meta property="og:title" content="Earnest S. | Data Analyst Portfolio">
-<meta property="og:description" content="Explore the work of Earnest, a Data Analyst and AI Enthusiast focused on building impactful projects.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourdomain.com"> <!-- Replace with real URL -->
-<meta property="og:image" content="https://yourdomain.com/preview-image.jpg"> <!-- Optional thumbnail -->
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Earnest S.</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <script defer src="js/script.js"></script>
 </head>
-<body>
-    <div id="loader">
-  <div class="spinner"></div>
-</div>
+<body class="fade-in">
+  <!-- Page Loader -->
+  <div id="loader"><div class="spinner" role="status" aria-label="Loading..."></div></div>
 
+  <!-- Header -->
   <header class="header">
     <div class="container">
       <h1 class="logo">Earnest S.</h1>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
-        <button id="theme-toggle">🌙</button>
+        <button id="theme-toggle" aria-label="Toggle theme" tabindex="0">🌙</button>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-   <section style="padding-top: 100px;">
-  <h2 class="hero-title">Get in Touch</h2>
-  <p style="margin-top: 10px;">Fill out the form below and I'll get back to you!</p>
+  <!-- Contact Section -->
+  <main class="container" style="padding-top: 100px; text-align: center;">
+    <h2 class="hero-title">Get in Touch</h2>
+    <p>Fill out the form below and I'll get back to you!</p>
 
-  <form action="https://formsubmit.co/earni8105@gmail.com" method="POST" class="contact-form">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-    <button type="submit" class="btn primary">Send Message</button>
-  </form>
-</section>
-
-      </div>
-    </section>
+    <form action="https://formsubmit.co/earni8105@gmail.com" method="POST" class="contact-form" aria-label="Contact Form">
+      <input type="hidden" name="_next" value="thank-you.html">
+      <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
+      <input type="email" name="email" placeholder="Your Email" required aria-label="Email">
+      <textarea name="message" placeholder="Your Message" rows="5" required aria-label="Message"></textarea>
+      <button type="submit" class="btn primary">Send Message</button>
+    </form>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p>&copy; 2025 Earnest S. | <a href="mailto:earni8105@gmail.com">earni8105@gmail.com</a></p>
     </div>
   </footer>
+
+  <!-- Optional Toast (style it in CSS if used) -->
+  <div id="confirmation-toast" class="toast" role="alert" aria-live="assertive" style="display: none;">
+    Thanks for reaching out, I'll get back to you soon!
+  </div>
 </body>
 </html>

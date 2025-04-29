@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <link rel="icon" href="assets/favicon.ico" type="image/png">
-    <meta name="description" content="Portfolio of Earnest S. - Data Analyst with expertise in IoT, AI, and data visualization.">
-<meta name="keywords" content="Earnest, Data Analyst, AI, IoT, Python, Power BI, Portfolio, SQL, Projects">
-<meta name="author" content="Earnest S.">
-<meta property="og:title" content="Earnest S. | Data Analyst Portfolio">
-<meta property="og:description" content="Explore the work of Earnest, a Data Analyst and AI Enthusiast focused on building impactful projects.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourdomain.com"> <!-- Replace with real URL -->
-<meta property="og:image" content="https://yourdomain.com/preview-image.jpg"> <!-- Optional thumbnail -->
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Earnest S.</title>
@@ -18,47 +8,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <script defer src="js/script.js"></script>
 </head>
-<body>
-    <div id="loader">
-  <div class="spinner"></div>
-</div>
+<body class="fade-in">
+  <!-- Loader -->
+  <div id="loader"><div class="spinner" role="status" aria-label="Loading page..."></div></div>
 
+  <!-- Header -->
   <header class="header">
     <div class="container">
       <h1 class="logo">Earnest S.</h1>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main Navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
-        <button id="theme-toggle">🌙</button>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <section style="padding-top: 100px;">
-      <h2 class="hero-title">My Projects</h2>
+  <!-- Projects -->
+  <main class="container" style="padding-top: 100px;">
+    <h2 class="hero-title">Projects</h2>
 
-      <div style="margin-top: 40px;">
-        <div class="project-card" style="margin-bottom: 30px;">
-          <h3>📈 IoT Patient Health Monitoring</h3>
-          <p>Built an IoT-based real-time monitoring system for bedridden patients, improving emergency response by 40%.</p>
-        </div>
+    <section class="project-list" style="margin-top: 40px;">
+      <article class="project-card" style="margin-bottom: 30px;">
+        <h3>📈 IoT Patient Health Monitoring</h3>
+        <p>
+          Real-time monitoring system for bedridden patients using IoT, improving emergency response time by 40%.
+          Integrated sensors + Python backend, visualized via dashboards.
+        </p>
+      </article>
 
-        <div class="project-card" style="margin-bottom: 30px;">
-          <h3>🤖 AI Chatbot (Ongoing)</h3>
-          <p>Building a conversational chatbot using Google Gemini API with real-time NLP and advanced UI/UX design.</p>
-        </div>
+      <article class="project-card" style="margin-bottom: 30px;">
+        <h3>🤖 AI Chatbot (Ongoing)</h3>
+        <p>
+          Conversational chatbot using Gemini API. Built with NLP, vector storage, and React front-end UI.
+        </p>
+      </article>
 
-        <div class="project-card">
-          <h3>🌾 Intelligent Crop Monitoring</h3>
-          <p>Developed an end-to-end IoT agriculture monitoring system using Python ETL, APIs, and Power BI dashboards.</p>
-        </div>
-      </div>
+      <article class="project-card">
+        <h3>🌾 Intelligent Crop Monitoring System</h3>
+        <p>
+          IoT sensors + Power BI + Python ETL pipeline to monitor crop environments, optimize water use, and visualize health data.
+        </p>
+      </article>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p>&copy; 2025 Earnest S. | <a href="mailto:earni8105@gmail.com">earni8105@gmail.com</a></p>
