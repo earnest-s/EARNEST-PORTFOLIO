@@ -121,31 +121,25 @@
     </div>
   </section>
 
-<!-- Contact Section -->
+<!-- Contact Section with Netlify Forms -->
 <section id="contact" class="section">
   <div class="container">
     <div class="section-content">
       <h2 class="section-title">Get in Touch</h2>
       <p class="section-subtitle">Fill out the form below and I'll get back to you!</p>
-
-      <form id="contact-form" class="contact-form" method="POST" action="https://formsubmit.co/earni8105@gmail.com" aria-label="Contact Form">
+       
+      <form name="contact" method="POST" data-netlify="true" class="contact-form" aria-label="Contact Form">
         <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
         <input type="email" name="email" placeholder="Your Email" required aria-label="Email">
         <textarea name="message" placeholder="Your Message" rows="5" required aria-label="Message"></textarea>
-
+         
         <button type="submit" class="btn primary">
           <i class="fas fa-paper-plane"></i> Send Message
         </button>
-        
-        <!-- Hidden Fields for FormSubmit -->
-        <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
-        <input type="hidden" name="_captcha" value="false">
       </form>
     </div>
   </div>
 </section>
-
-
 
   <!-- Footer -->
   <footer class="footer">
