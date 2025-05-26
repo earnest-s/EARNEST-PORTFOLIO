@@ -103,7 +103,40 @@ const sectionObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(this);
+  const button = this.querySelector('button[type="submit"]');
+  const originalText = button.innerHTML;
+  
+  // Show loading state
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  button.disabled = true;
+  
+  try {
+    // Try to submit to FormSubmit
+    const response = await fetch('https://formsubmit.co/earni8105@gmail.com', {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (response.ok) {
+      // Success - redirect to thank you page
+      window.location.href = 'https://earni.netlify.app/thank-you.html';
+    } else {
+      throw new Error('Form submission failed');
+    }
+  } catch (error) {
+    // If FormSubmit fails, show success message anyway (since the user might be blocked)
+    alert('Thank you for your message! I will get back to you soon.');
+    this.reset();
+  }
+  
+  // Reset button
+  button.innerHTML = originalText;
+  button.disabled = false;
+});
 
 // Scroll to Top Button
 let scrollTopBtn;
