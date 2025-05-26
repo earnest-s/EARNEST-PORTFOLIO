@@ -1,95 +1,129 @@
-// ==============================
-// Typing effect
-// ==============================
-const typingText = document.getElementById("typing-text");
-const textArray = [
-  "Turning Data into Insights...",
-  "Data Analyst | IoT Enthusiast",
-  "Building AI Solutions"
-];
-let typingIndex = 0;
-let charIndex = 0;
+// Theme Management (with localStorage)
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
 
-function typeText() {
-  if (typingText) {
-    if (charIndex === 0) typingText.textContent = ""; // clear before typing
-    if (charIndex < textArray[typingIndex].length) {
-      typingText.textContent += textArray[typingIndex].charAt(charIndex++);
-      setTimeout(typeText, 100);
-    } else {
-      setTimeout(eraseText, 2000);
-    }
-  }
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  body.setAttribute('data-theme', 'dark');
+  themeToggle.querySelector('i').className = 'fas fa-sun';
 }
 
-function eraseText() {
-  if (charIndex > 0) {
-    typingText.textContent = textArray[typingIndex].substring(0, --charIndex);
-    setTimeout(eraseText, 50);
+// Toggle theme
+themeToggle.addEventListener('click', () => {
+  const isDark = body.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    body.removeAttribute('data-theme');
+    themeToggle.querySelector('i').className = 'fas fa-moon';
+    localStorage.setItem('theme', 'light');
   } else {
-    typingIndex = (typingIndex + 1) % textArray.length;
-    setTimeout(typeText, 500);
+    body.setAttribute('data-theme', 'dark');
+    themeToggle.querySelector('i').className = 'fas fa-sun';
+    localStorage.setItem('theme', 'dark');
   }
+});
+
+// Typing Animation
+const typingText = document.getElementById('typing-text');
+const phrases = ['Data Analyst', 'IoT Developer', 'AI Enthusiast', 'Problem Solver'];
+let phraseIndex = 0, charIndex = 0, isDeleting = false;
+
+function typeEffect() {
+  const currentPhrase = phrases[phraseIndex];
+  typingText.textContent = isDeleting
+    ? currentPhrase.substring(0, charIndex - 1)
+    : currentPhrase.substring(0, charIndex + 1);
+  charIndex += isDeleting ? -1 : 1;
+
+  let typeSpeed = isDeleting ? 50 : 100;
+  if (!isDeleting && charIndex === currentPhrase.length) {
+    typeSpeed = 2000;
+    isDeleting = true;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    typeSpeed = 500;
+  }
+
+  setTimeout(typeEffect, typeSpeed);
 }
 
-// ==============================
-// Theme toggling (Dark/Light)
-// ==============================
-function applyTheme(theme) {
-  const isDark = theme === "dark";
-  document.body.classList.toggle("dark", isDark);
+// Navigation
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
 
-  const toggle = document.getElementById("theme-toggle");
-  if (toggle) {
-    toggle.innerHTML = isDark
-      ? '<i class="fas fa-sun"></i>'
-      : '<i class="fas fa-moon"></i>';
-  }
-
-  localStorage.setItem("theme", theme);
+function showSection(targetId) {
+  navLinks.forEach(link => link.classList.remove('active'));
+  const activeLink = document.querySelector(`[href="#${targetId}"]`);
+  if (activeLink) activeLink.classList.add('active');
+  const targetSection = document.getElementById(targetId);
+  if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-// ==============================
-// Page Load Setup
-// ==============================
-document.addEventListener("DOMContentLoaded", () => {
-  // Apply saved or system-preferred theme
-  const saved = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(saved || (prefersDark ? "dark" : "light"));
-
-  // Toggle theme on click
-  const toggle = document.getElementById("theme-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const isDark = document.body.classList.contains("dark");
-      applyTheme(isDark ? "light" : "dark");
-    });
-  }
-
-  // Start typing animation
-  if (typingText) setTimeout(typeText, 500);
-
-  // Add fade-in effect on load
-  document.body.classList.add("fade-in");
-
-  // Add smooth transition between pages
-  document.querySelectorAll("a[href]").forEach(link => {
-    const href = link.getAttribute("href");
-    if (href && !href.startsWith("#") && !link.hasAttribute("target")) {
-      link.addEventListener("click", e => {
-        e.preventDefault();
-        document.body.classList.add("fade-out");
-        setTimeout(() => (window.location.href = href), 300);
-      });
-    }
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    showSection(targetId);
   });
 });
 
-// ==============================
-// Hide loader on full page load
-// ==============================
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  if (loader) loader.style.display = "none";
+// Update nav-link active class based on scroll position
+const updateActiveNav = (entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+};
+
+const activeObserver = new IntersectionObserver(updateActiveNav, { threshold: 0.5 });
+sections.forEach(section => activeObserver.observe(section));
+
+// Loader
+const loader = document.getElementById('loader');
+function hideLoader() {
+  loader.classList.add('hidden');
+  setTimeout(() => loader.style.display = 'none', 500);
+}
+
+// Animate section entry
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const content = entry.target.querySelector('.section-content');
+      if (content) {
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+      }
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+
+
+// Scroll to Top Button
+let scrollTopBtn;
+function createScrollTopButton() {
+  scrollTopBtn = document.createElement('button');
+  scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+  scrollTopBtn.className = 'scroll-top-btn';
+  scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.body.appendChild(scrollTopBtn);
+}
+window.addEventListener('scroll', () => {
+  if (!scrollTopBtn) return;
+  scrollTopBtn.style.display = window.pageYOffset > 300 ? 'flex' : 'none';
+});
+setTimeout(createScrollTopButton, 2000);
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(typeEffect, 1000);
+  setTimeout(hideLoader, 1500);
+  sections.forEach(section => sectionObserver.observe(section));
+  setTimeout(() => body.classList.add('fade-in'), 100);
 });
