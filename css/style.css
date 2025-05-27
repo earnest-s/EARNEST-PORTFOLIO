@@ -479,6 +479,56 @@ body.fade-in {
   transform: translateY(-3px);
 }
 
+/* Form Messages */
+.form-message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+
+.form-message.success {
+  background: #10b981;
+  color: white;
+}
+
+.form-message.error {
+  background: #ef4444;
+  color: white;
+}
+
+.form-message.info {
+  background: #3b82f6;
+  color: white;
+}
+
+/* Thank You Page Styles */
+.thank-you-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+}
+
+.thank-you-container h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.thank-you-container p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
 /* Keyboard navigation styles */
 .keyboard-nav *:focus {
   outline: 2px solid var(--primary-color) !important;
@@ -548,5 +598,9 @@ body.fade-in {
     width: 100%;
     justify-content: center;
     max-width: 250px;
+  }
+  
+  .thank-you-container h2 {
+    font-size: 2rem;
   }
 }

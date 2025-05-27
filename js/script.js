@@ -16,11 +16,15 @@ function initializeTheme() {
   if (prefersDark) {
     AppState.theme = 'dark';
     body.setAttribute('data-theme', 'dark');
-    themeToggle.querySelector('i').className = 'fas fa-sun';
+    if (themeToggle) {
+      themeToggle.querySelector('i').className = 'fas fa-sun';
+    }
   } else {
     AppState.theme = 'light';
     body.removeAttribute('data-theme');
-    themeToggle.querySelector('i').className = 'fas fa-moon';
+    if (themeToggle) {
+      themeToggle.querySelector('i').className = 'fas fa-moon';
+    }
   }
 }
 
@@ -30,11 +34,15 @@ function toggleTheme() {
   if (isDark) {
     AppState.theme = 'light';
     body.removeAttribute('data-theme');
-    themeToggle.querySelector('i').className = 'fas fa-moon';
+    if (themeToggle) {
+      themeToggle.querySelector('i').className = 'fas fa-moon';
+    }
   } else {
     AppState.theme = 'dark';
     body.setAttribute('data-theme', 'dark');
-    themeToggle.querySelector('i').className = 'fas fa-sun';
+    if (themeToggle) {
+      themeToggle.querySelector('i').className = 'fas fa-sun';
+    }
   }
 }
 
@@ -44,11 +52,15 @@ if (window.matchMedia) {
     if (e.matches) {
       AppState.theme = 'dark';
       body.setAttribute('data-theme', 'dark');
-      themeToggle.querySelector('i').className = 'fas fa-sun';
+      if (themeToggle) {
+        themeToggle.querySelector('i').className = 'fas fa-sun';
+      }
     } else {
       AppState.theme = 'light';
       body.removeAttribute('data-theme');
-      themeToggle.querySelector('i').className = 'fas fa-moon';
+      if (themeToggle) {
+        themeToggle.querySelector('i').className = 'fas fa-moon';
+      }
     }
   });
 }
@@ -554,6 +566,39 @@ function cleanup() {
   }
 }
 
+// Thank you page specific functionality
+function initializeThankYouPage() {
+  // Check if we're on the thank you page
+  if (window.location.pathname.includes('thank-you.html')) {
+    // Add a simple animation to the thank you message
+    const thankYouContainer = document.querySelector('.thank-you-container');
+    if (thankYouContainer) {
+      thankYouContainer.style.cssText = `
+        text-align: center;
+        padding: 100px 20px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      `;
+      
+      // Animate in after a short delay
+      setTimeout(() => {
+        thankYouContainer.style.opacity = '1';
+        thankYouContainer.style.transform = 'translateY(0)';
+      }, 300);
+    }
+    
+    // Auto-redirect after 5 seconds (optional)
+    setTimeout(() => {
+      const redirectBtn = document.querySelector('a[href*="index.html"]');
+      if (redirectBtn && !document.hidden) {
+        // Uncomment the line below if you want auto-redirect
+        // window.location.href = redirectBtn.href;
+      }
+    }, 5000);
+  }
+}
+
 // Initialize application
 function initializeApp() {
   // Initialize theme
@@ -562,22 +607,27 @@ function initializeApp() {
   // Setup event listeners
   setupEventListeners();
   
-  // Initialize observers
-  initializeObservers();
-  
-  // Start typing animation
-  setTimeout(() => {
-    typeEffect();
-  }, 1000);
+  // Initialize observers (only for main page)
+  if (!window.location.pathname.includes('thank-you.html')) {
+    initializeObservers();
+    
+    // Start typing animation
+    setTimeout(() => {
+      typeEffect();
+    }, 1000);
+    
+    // Create scroll top button
+    setTimeout(createScrollTopButton, 2000);
+  } else {
+    // Initialize thank you page
+    initializeThankYouPage();
+  }
   
   // Hide loader
   setTimeout(() => {
     hideLoader();
     document.body.classList.add('fade-in');
   }, 1500);
-  
-  // Create scroll top button
-  setTimeout(createScrollTopButton, 2000);
 }
 
 // DOM Content Loaded
