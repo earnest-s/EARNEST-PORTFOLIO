@@ -651,3 +651,15 @@ if (typeof module !== 'undefined' && module.exports) {
     isValidEmail
   };
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('typing-text')) {
+    typeEffect(); // Start typing effect only if on the homepage
+  }
+
+  if (document.querySelector('form')) {
+    document.querySelector('form').addEventListener('submit', handleFormSubmission);
+  }
+
+  // Other page-specific initializations here
+});
