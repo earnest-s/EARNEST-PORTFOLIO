@@ -10,11 +10,17 @@
   <meta name="keywords" content="Earnest, Data Analyst, AI, IoT, Python, Power BI, Portfolio, SQL, Projects">
   <meta name="author" content="Earnest S.">
 
+  <!-- Favicon - Fixed with multiple formats -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+
   <!-- Styles & Fonts -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="assets/favicon.png" type="image/png" />
 
   <!-- Scripts -->
   <script defer src="js/script.js"></script>
@@ -62,11 +68,47 @@
        <div class="hero-right">
         <div class="section-content">
           <div class="hero-image-placeholder">
-            <img src="assets/data-illustration.svg" alt="Data Illustration" class="hero-svg" />
-              <p>Data Visualization</p>
-            </div>
+            <svg class="hero-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- Data visualization illustration -->
+              <defs>
+                <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+                  <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.6" />
+                </linearGradient>
+              </defs>
+              
+              <!-- Chart bars -->
+              <rect x="50" y="200" width="30" height="80" fill="url(#chartGradient)" rx="4"/>
+              <rect x="100" y="160" width="30" height="120" fill="url(#chartGradient)" rx="4"/>
+              <rect x="150" y="140" width="30" height="140" fill="url(#chartGradient)" rx="4"/>
+              <rect x="200" y="180" width="30" height="100" fill="url(#chartGradient)" rx="4"/>
+              <rect x="250" y="120" width="30" height="160" fill="url(#chartGradient)" rx="4"/>
+              
+              <!-- Data points and connections -->
+              <circle cx="65" cy="190" r="4" fill="white"/>
+              <circle cx="115" cy="150" r="4" fill="white"/>
+              <circle cx="165" cy="130" r="4" fill="white"/>
+              <circle cx="215" cy="170" r="4" fill="white"/>
+              <circle cx="265" cy="110" r="4" fill="white"/>
+              
+              <polyline points="65,190 115,150 165,130 215,170 265,110" 
+                        stroke="white" stroke-width="2" fill="none" opacity="0.8"/>
+              
+              <!-- Floating data elements -->
+              <circle cx="320" cy="60" r="8" fill="white" opacity="0.7">
+                <animate attributeName="cy" values="60;50;60" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="340" cy="90" r="6" fill="white" opacity="0.6">
+                <animate attributeName="cy" values="90;80;90" dur="2.5s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="360" cy="70" r="5" fill="white" opacity="0.5">
+                <animate attributeName="cy" values="70;60;70" dur="2s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+            <p>Data Visualization</p>
           </div>
         </div>
+       </div>
       </div>
     </div>
   </section>
@@ -81,7 +123,6 @@
             I'm a motivated Data Analyst with hands-on experience in IoT systems, AI chatbot development, and business dashboards.
             Skilled in Python, SQL, Power BI, Tableau, and Git — I build data-powered tools to solve real-world problems and drive decisions.
           </p>
-          </div>
         </div>
       </div>
     </div>
@@ -121,30 +162,29 @@
     </div>
   </section>
 
-<!-- Contact Section -->
-<section id="contact" class="section">
-  <div class="container">
-    <div class="section-content">
-      <h2 class="section-title">Get in Touch</h2>
-      <p class="section-subtitle">Fill out the form below and I'll get back to you!</p>
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-content">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">Fill out the form below and I'll get back to you!</p>
 
-      <form id="contact-form" class="contact-form" method="POST" action="https://formsubmit.co/earni8105@gmail.com" aria-label="Contact Form">
-        <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
-        <input type="email" name="email" placeholder="Your Email" required aria-label="Email">
-        <textarea name="message" placeholder="Your Message" rows="5" required aria-label="Message"></textarea>
+        <div id="success-message" class="success-message">
+          <i class="fas fa-check-circle"></i> Thank you for your message! I'll get back to you soon.
+        </div>
 
-        <button type="submit" class="btn primary">
-          <i class="fas fa-paper-plane"></i> Send Message
-        </button>
-        
-        <!-- Hidden Fields for FormSubmit -->
-        <input type="hidden" name="_next" value="https://earni.netlify.app/thank-you.html">
-        <input type="hidden" name="_captcha" value="false">
-      </form>
+        <form id="contact-form" class="contact-form" aria-label="Contact Form">
+          <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
+          <input type="email" name="email" placeholder="Your Email" required aria-label="Email">
+          <textarea name="message" placeholder="Your Message" rows="5" required aria-label="Message"></textarea>
+
+          <button type="submit" class="btn primary">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
