@@ -567,6 +567,13 @@ body.fade-in {
   line-height: 1.6;
 }
 
+/* Update the thank-you-icon size */
+.thank-you-container .thank-you-icon {
+  font-size: 3rem; /* Reduced from 5rem */
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
 /* Keyboard navigation styles */
 .keyboard-nav *:focus {
   outline: 2px solid var(--primary-color) !important;
@@ -611,8 +618,16 @@ body.fade-in {
     padding: 0 15px;
   }
   
+  .logo {
+    font-size: 1rem; /* Reduced from 1.2rem for better fit */
+  }
+  
+  .header .container {
+    padding: 10px 15px; /* Slightly reduce padding for more space */
+  }
+  
   .nav {
-    gap: 15px;
+    gap: 15px; /* Reduce gap between nav items */
   }
   
   .nav-link {
@@ -640,6 +655,18 @@ body.fade-in {
   
   .thank-you-container h2 {
     font-size: 2rem;
+  }
+  
+  .thank-you-container .thank-you-icon {
+    font-size: 2.5rem; /* Even smaller on mobile */
+  }
+  
+  .thank-you-title {
+    font-size: 2rem;
+  }
+
+  .thank-you-message {
+    font-size: 1rem;
   }
 }
 

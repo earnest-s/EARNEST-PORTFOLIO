@@ -230,26 +230,15 @@ function animateSectionEntry(entries) {
 // Form Handling with Enhanced Security and Debugging
 function handleFormSubmission(e) {
   e.preventDefault();
-  console.log('Form submission triggered');
   
   const form = e.target;
   const formData = new FormData(form);
   const button = form.querySelector('button[type="submit"]');
   const originalText = button.innerHTML;
   
-  // Log form data for debugging
-  console.log('Form data entries:');
-  for (const [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
-  }
-  
-  // Rate limiting
+  // Rate limiting check
   AppState.formSubmissionAttempts++;
-  console.log(`Form submission attempt: ${AppState.formSubmissionAttempts}`);
-  
   if (AppState.formSubmissionAttempts > 5) {
-    console.log('Rate limit exceeded');
-    showFormMessage('Too many attempts. Please wait before trying again.', 'error');
     return;
   }
   
@@ -258,51 +247,58 @@ function handleFormSubmission(e) {
   const email = formData.get('email')?.trim();
   const message = formData.get('message')?.trim();
   
-  console.log('Validation check:', { name, email, message });
-  
-  if (!name || !email || !message) {
-    console.log('Validation failed: missing fields');
-    showFormMessage('Please fill in all required fields.', 'error');
+  if (!name || !email || !message || !isValidEmail(email)) {
     return;
   }
-  
-  if (!isValidEmail(email)) {
-    console.log('Validation failed: invalid email');
-    showFormMessage('Please enter a valid email address.', 'error');
-    return;
-  }
-  
-  console.log('Validation passed, submitting form...');
   
   // Show loading state
   button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
   button.disabled = true;
   
-  // Submit form with timeout
-  const submissionTimeout = setTimeout(() => {
-    console.log('Form submission timeout');
-    showFormMessage('Form submission is taking longer than expected. Your message may have been sent.', 'info');
-    button.innerHTML = originalText;
-    button.disabled = false;
-  }, 10000); // 10 second timeout
+  // Create and submit form directly
+  const submitForm = document.createElement('form');
+  submitForm.method = 'POST';
+  submitForm.action = 'https://formsubmit.co/earni8105@gmail.com';
+  submitForm.style.display = 'none';
   
-  submitForm(formData)
-    .then(() => {
-      clearTimeout(submissionTimeout);
-      console.log('Form submission successful');
-      showFormMessage('Thank you for your message! I will get back to you soon.', 'success');
-      form.reset();
-      AppState.formSubmissionAttempts = 0; // Reset on success
-    })
-    .catch((error) => {
-      clearTimeout(submissionTimeout);
-      console.error('Form submission error:', error);
-      showFormMessage('Your message has been prepared. Please check your email client or try again.', 'info');
-    })
-    .finally(() => {
-      button.innerHTML = originalText;
-      button.disabled = false;
-    });
+  // Add form data
+  for (const [key, value] of formData.entries()) {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = value;
+    submitForm.appendChild(input);
+  }
+  
+  // Add FormSubmit configuration
+  const nextInput = document.createElement('input');
+  nextInput.type = 'hidden';
+  nextInput.name = '_next';
+  nextInput.value = window.location.origin + '/thank-you';
+  submitForm.appendChild(nextInput);
+  
+  const captchaInput = document.createElement('input');
+  captchaInput.type = 'hidden';
+  captchaInput.name = '_captcha';
+  captchaInput.value = 'false';
+  submitForm.appendChild(captchaInput);
+  
+  const subjectInput = document.createElement('input');
+  subjectInput.type = 'hidden';
+  subjectInput.name = '_subject';
+  subjectInput.value = 'New Portfolio Contact Form Submission';
+  submitForm.appendChild(subjectInput);
+  
+  // Submit form
+  document.body.appendChild(submitForm);
+  submitForm.submit();
+  
+  // Clean up
+  setTimeout(() => {
+    if (submitForm.parentNode) {
+      submitForm.remove();
+    }
+  }, 1000);
 }
 
 // Email validation
