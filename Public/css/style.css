@@ -13,13 +13,13 @@
 [data-theme="dark"] {
   --primary-color: #ef4444;
   --primary-hover: #dc2626;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --bg-primary: #111827;
-  --bg-secondary: #1f2937;
-  --border-color: #374151;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --bg-primary: #000000;
+  --bg-secondary: #18181b;
+  --border-color: #27272a;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -96,7 +96,7 @@ body.fade-in {
 }
 
 [data-theme="dark"] .header {
-  background: rgba(17, 24, 39, 0.95);
+  background: rgba(0, 0, 0, 0.95);
 }
 
 .header .container {
@@ -413,8 +413,37 @@ body.fade-in {
 }
 
 /* Dark theme adjustments */
+[data-theme="dark"] .header {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+[data-theme="dark"] .project-card {
+  background: #18181b;
+  border-color: #27272a;
+}
+
 [data-theme="dark"] .project-link {
-  background: var(--bg-secondary);
+  background: #000000;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form textarea {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .hero-image-placeholder {
+  background: linear-gradient(135deg, var(--primary-color), #991b1b);
+}
+
+[data-theme="dark"] .footer {
+  background: #18181b;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .thank-you-container {
+  background: #18181b;
 }
 
 /* Contact Section */
