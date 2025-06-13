@@ -16,8 +16,13 @@ app.get('/', (req, res) => {
   res.render('index'); // Will render views/index.ejs
 });
 
+// Handle both GET and POST for thank-you page
 app.get('/thank-you', (req, res) => {
   res.render('thank-you'); // Will render views/thank-you.ejs
+});
+
+app.post('/thank-you', (req, res) => {
+  res.render('thank-you');
 });
 
 // Start the server

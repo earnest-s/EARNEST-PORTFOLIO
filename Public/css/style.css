@@ -343,6 +343,9 @@ body.fade-in {
   box-shadow: var(--shadow);
   transition: all 0.3s ease;
   border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .project-card:hover {
@@ -377,6 +380,41 @@ body.fade-in {
 .project-card p {
   color: var(--text-secondary);
   line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+.project-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .project-link {
+  background: var(--bg-secondary);
 }
 
 /* Contact Section */

@@ -339,7 +339,7 @@ async function submitForm(formData) {
     const nextInput = document.createElement('input');
     nextInput.type = 'hidden';
     nextInput.name = '_next';
-    nextInput.value = window.location.origin + '/thank-you.html';
+    nextInput.value = window.location.origin + '/thank-you'; // Remove .ejs extension
     form.appendChild(nextInput);
     
     const captchaInput = document.createElement('input');
@@ -573,7 +573,7 @@ function setupEventListeners() {
         // In-page scroll
         showSection(href.substring(1));
       } else if (href) {
-        // External page (like thank-you.html)
+        // External page (like thank-you.ejs)
         handlePageExit(href);
       }
     });
@@ -613,7 +613,7 @@ function cleanup() {
 // Thank you page specific functionality
 function initializeThankYouPage() {
   // Check if we're on the thank you page
-  if (window.location.pathname.includes('thank-you.html')) {
+  if (window.location.pathname.includes('thank-you.ejs')) {
     // Add a simple animation to the thank you message
     const thankYouContainer = document.querySelector('.thank-you-container');
     if (thankYouContainer) {
@@ -736,7 +736,7 @@ function initializeApp() {
   setupEventListeners();
   
   // Initialize observers and animations (only for main page)
-  if (!window.location.pathname.includes('thank-you.html')) {
+  if (!window.location.pathname.includes('thank-you.ejs')) {
     initializeObservers();
     
     // Initialize GSAP animations
