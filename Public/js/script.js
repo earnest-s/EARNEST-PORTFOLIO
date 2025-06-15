@@ -2,8 +2,8 @@
 const AppState = {
   theme: 'light',
   currentSection: 'home',
-  formSubmissionAttempts: 0,
-  isLoading: true
+  formSubmissionAttempts: 0
+  // Remove isLoading property
 };
 
 // Theme Management (using in-memory storage)
@@ -173,45 +173,6 @@ function updateActiveNav(entries) {
       }
     }
   });
-}
-
-// Loader Management
-const loader = document.getElementById('loader');
-
-function hideLoader() {
-  if (!loader) return;
-  
-  AppState.isLoading = false;
-  
-  // Check if GSAP is available
-  if (typeof gsap !== 'undefined') {
-    gsap.to(loader, {
-      duration: 0.8,
-      opacity: 0,
-      ease: "power2.out",
-      onComplete: () => {
-        if (loader && loader.parentNode) {
-          loader.style.display = 'none';
-        }
-      }
-    });
-  } else {
-    // Fallback without GSAP
-    loader.classList.add('hidden');
-    setTimeout(() => {
-      if (loader && loader.parentNode) {
-        loader.style.display = 'none';
-      }
-    }, 500);
-  }
-}
-
-function showLoader() {
-  if (!loader) return;
-  
-  AppState.isLoading = true;
-  loader.style.display = 'flex';
-  loader.classList.remove('hidden');
 }
 
 // Section Animation Observer
@@ -641,22 +602,16 @@ function initializeThankYouPage() {
 
 // Initialize GSAP animations (only if GSAP is available)
 function initializeGSAPAnimations() {
-  // Check if GSAP is loaded
   if (typeof gsap === 'undefined') {
     console.warn('GSAP not loaded, skipping animations');
     return;
   }
 
-  // Register ScrollTrigger if available
-  if (typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-  }
-
-  // Hero section GSAP animations
+  // Hero section animations
   const heroTitle = document.querySelector('.hero-title');
   const heroSubtitle = document.querySelector('.hero-subtitle');
   const heroDescription = document.querySelector('.hero-description');
-  const heroButtons = document.querySelectorAll('.hero-buttons .btn');
+  const heroButtons = document.querySelector('.hero-buttons'); // Changed to target container
 
   if (heroTitle) {
     gsap.from(heroTitle, {
@@ -687,12 +642,12 @@ function initializeGSAPAnimations() {
     });
   }
 
-  if (heroButtons.length > 0) {
+  // Animate buttons container instead of individual buttons
+  if (heroButtons) {
     gsap.from(heroButtons, {
       duration: 0.6,
       y: 20,
       opacity: 0,
-      stagger: 0.2,
       delay: 0.7,
       ease: "back.out(1.7)"
     });
@@ -719,6 +674,55 @@ function initializeGSAPAnimations() {
       });
     });
   }
+
+  // SVG animations
+  const svg = document.querySelector('.hero-svg');
+  if (svg && typeof gsap !== 'undefined') {
+    // Animate grid pattern
+    gsap.from('pattern path', {
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1
+    });
+
+    // Animate axes
+    gsap.from('.chart-container line', {
+      scaleX: 0,
+      scaleY: 0,
+      duration: 1,
+      transformOrigin: 'left bottom',
+      stagger: 0.2
+    });
+
+    // Animate floating elements
+    gsap.to('.float-item', {
+      y: -20,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      stagger: {
+        each: 0.5,
+        from: "random"
+      },
+      ease: "sine.inOut"
+    });
+
+    // Add hover effect to data points
+    document.querySelectorAll('.data-point').forEach(point => {
+      point.addEventListener('mouseenter', () => {
+        gsap.to(point, {
+          scale: 1.5,
+          duration: 0.3
+        });
+      });
+      point.addEventListener('mouseleave', () => {
+        gsap.to(point, {
+          scale: 1,
+          duration: 0.3
+        });
+      });
+    });
+  }
 }
 
 // Initialize application
@@ -734,37 +738,27 @@ function initializeApp() {
   // Initialize observers and animations (only for main page)
   if (!window.location.pathname.includes('thank-you.ejs')) {
     initializeObservers();
-    
-    // Initialize GSAP animations
     initializeGSAPAnimations();
     
-    // Start typing animation if element exists
     if (typingText) {
       setTimeout(() => {
         typeEffect();
       }, 1000);
     }
     
-    // Create scroll top button
     setTimeout(createScrollTopButton, 2000);
   } else {
-    // Initialize thank you page
     initializeThankYouPage();
   }
   
-  // Hide loader after initialization
-  setTimeout(() => {
-    hideLoader();
-    
-    // Animate body content fade-in (only if GSAP is available)
-    if (typeof gsap !== 'undefined') {
-      gsap.from("body", {
-        duration: 1,
-        opacity: 0,
-        ease: "power2.out"
-      });
-    }
-  }, 1200);
+  // Animate body content fade-in (only if GSAP is available)
+  if (typeof gsap !== 'undefined') {
+    gsap.from("body", {
+      duration: 0.5, // Reduced from 1 to 0.5 for faster initial load
+      opacity: 0,
+      ease: "power2.out"
+    });
+  }
 }
 
 // DOM Content Loaded - Single event listener
@@ -787,4 +781,199 @@ if (typeof module !== 'undefined' && module.exports) {
     showSection,
     isValidEmail
   };
+}
+
+// Add to initializeGSAPAnimations()
+if (typeof ScrollTrigger !== 'undefined' && typeof MorphSVGPlugin !== 'undefined') {
+  // Animate the SVG paths in hero section
+  const svgPaths = document.querySelectorAll(".hero-svg rect, .hero-svg polyline");
+  
+  gsap.from(svgPaths, {
+    scrollTrigger: {
+      trigger: "#home",
+      start: "top center",
+      end: "bottom center",
+      scrub: 1
+    },
+    scaleY: 0,
+    transformOrigin: "bottom center",
+    stagger: 0.1,
+    ease: "power2.inOut"
+  });
+
+  // Create a more complex path animation for the line chart
+  const linePath = document.querySelector(".hero-svg polyline");
+  if (linePath) {
+    const originalPoints = linePath.getAttribute("points");
+    const pointsArray = originalPoints.split(" ").map(p => p.split(","));
+    
+    // Create a wavy starting state
+    const startPoints = pointsArray.map(([x,y], i) => 
+      [x, Number(y) + (i % 2 === 0 ? 30 : -30)].join(",")
+    ).join(" ");
+    
+    gsap.fromTo(linePath, 
+      { attr: { points: startPoints } },
+      {
+        attr: { points: originalPoints },
+        duration: 2,
+        ease: "elastic.out(1, 0.3)",
+        scrollTrigger: {
+          trigger: "#home",
+          start: "top 60%"
+        }
+      }
+    );
+  }
+}
+
+// Add floating data nodes like GSAP's homepage
+function createFloatingNodes() {
+  const container = document.querySelector(".hero-right");
+  if (!container) return;
+  
+  // Create 15 floating nodes
+  for (let i = 0; i < 15; i++) {
+    const node = document.createElement("div");
+    node.className = "floating-node";
+    node.style.cssText = `
+      position: absolute;
+      width: ${6 + Math.random() * 10}px;
+      height: ${6 + Math.random() * 10}px;
+      background: rgba(255,255,255,${0.2 + Math.random() * 0.3});
+      border-radius: 50%;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+    `;
+    container.appendChild(node);
+    
+    // Animate each node independently
+    gsap.to(node, {
+      x: `${-20 + Math.random() * 40}px`,
+      y: `${-20 + Math.random() * 40}px`,
+      duration: 3 + Math.random() * 4,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }
+}
+
+// Add to navigation click handler
+function showSection(targetId) {
+  // Only animate if GSAP is available
+  if (typeof gsap !== 'undefined') {
+    const currentSection = document.querySelector(`#${AppState.currentSection}`);
+    const targetSection = document.getElementById(targetId);
+    
+    if (currentSection && targetSection) {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Actual scroll happens after animation
+          targetSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
+      });
+      
+      tl.to(currentSection.querySelector('.section-content'), {
+        opacity: 0,
+        y: 50,
+        duration: 0.4,
+        ease: "power2.in"
+      })
+      .fromTo(targetSection.querySelector('.section-content'),
+        { opacity: 0, y: -50 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.2)" },
+        "-=0.2"
+      );
+    }
+  }
+  
+  // Update navigation state
+  AppState.currentSection = targetId;
+  navLinks.forEach(link => link.classList.remove('active'));
+  document.querySelector(`[href="#${targetId}"]`).classList.add('active');
+}
+
+// Enhanced button hover effects
+document.querySelectorAll('.btn, .project-link').forEach(button => {
+  // Add shine effect element
+  const shine = document.createElement('div');
+  shine.className = 'btn-shine';
+  shine.style.cssText = `
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.8) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    transform: rotate(30deg);
+    opacity: 0;
+    pointer-events: none;
+  `;
+  button.style.position = 'relative';
+  button.style.overflow = 'hidden';
+  button.appendChild(shine);
+  
+  // Hover animation
+  button.addEventListener('mouseenter', () => {
+    gsap.to(button, {
+      scale: 1.05,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+    gsap.to(shine, {
+      x: '100%',
+      opacity: 0.6,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  });
+  
+  button.addEventListener('mouseleave', () => {
+    gsap.to(button, {
+      scale: 1,
+      duration: 0.4,
+      ease: "elastic.out(1, 0.5)"
+    });
+    gsap.to(shine, {
+      x: '-100%',
+      opacity: 0,
+      duration: 0.3
+    });
+  });
+});
+
+// Add scroll progress indicator
+function createScrollIndicator() {
+  const indicator = document.createElement('div');
+  indicator.className = 'scroll-indicator';
+  indicator.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--primary-color);
+    width: 0%;
+    z-index: 1000;
+    transform-origin: left center;
+  `;
+  document.body.appendChild(indicator);
+  
+  ScrollTrigger.create({
+    trigger: "body",
+    start: "top top",
+    end: "bottom bottom",
+    onUpdate: self => {
+      gsap.to(indicator, {
+        width: `${self.progress * 100}%`,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+  });
 }

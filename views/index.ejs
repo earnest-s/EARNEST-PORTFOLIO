@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Earnest. S | Data Analyst Portfolio</title>
+  <title>Earnest.S | Portfolio</title>
 
   <!-- SEO -->
   <meta name="description" content="Portfolio of Earnest S. - Data Analyst with expertise in IoT, AI, and data visualization.">
@@ -28,9 +28,6 @@
   <script defer src="/js/script.js"></script>
 </head>
 <body class="fade-in">
-  <!-- Loader -->
-  <div id="loader"><div class="spinner" role="status" aria-label="Loading..."></div></div>
-
   <!-- Header -->
   <header class="header">
     <div class="container">
@@ -61,146 +58,185 @@
             </p>
 
             <div class="hero-buttons">
-              <a href="assets/Earnest_Resume.pdf" download class="btn primary"><i class="fas fa-download"></i> Download Resume</a>
-              <a href="assets/Earnest_Resume.pdf" target="_blank" class="btn outline"><i class="fas fa-eye"></i> View Resume</a>
+              <a href="/assets/Earnest_Resume.pdf" download class="btn primary">
+                <i class="fas fa-download"></i> Download Resume
+              </a>
+              <a href="/assets/Earnest_Resume.pdf" target="_blank" class="btn outline">
+                <i class="fas fa-eye"></i> View Resume
+              </a>
             </div>
           </div>
         </div>
 
        <div class="hero-right">
-        <div class="section-content">
-          <div class="hero-image-placeholder">
-            <svg class="hero-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-              <!-- Data visualization illustration -->
-              <defs>
-                <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
-                  <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.6" />
-                </linearGradient>
-              </defs>
+        <div class="hero-image-placeholder">
+          <svg class="hero-svg" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Grid -->
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(128,128,128,0.1)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            
+            <!-- Main Chart Area -->
+            <g class="chart-container" transform="translate(50, 50)">
+              <!-- Y-axis -->
+              <line x1="0" y1="0" x2="0" y2="300" stroke="currentColor" stroke-width="2"/>
+              <!-- X-axis -->
+              <line x1="0" y1="300" x2="400" y2="300" stroke="currentColor" stroke-width="2"/>
               
-              <!-- Chart bars -->
-              <rect x="50" y="200" width="30" height="80" fill="url(#chartGradient)" rx="4"/>
-              <rect x="100" y="160" width="30" height="120" fill="url(#chartGradient)" rx="4"/>
-              <rect x="150" y="140" width="30" height="140" fill="url(#chartGradient)" rx="4"/>
-              <rect x="200" y="180" width="30" height="100" fill="url(#chartGradient)" rx="4"/>
-              <rect x="250" y="120" width="30" height="160" fill="url(#chartGradient)" rx="4"/>
+              <!-- Data Points and Line -->
+              <g class="data-visualization">
+                <!-- Animated Line Chart -->
+                <path class="chart-line" d="M0,250 L100,200 L200,150 L300,100 L400,50" 
+                      fill="none" 
+                      stroke="var(--primary-color)" 
+                      stroke-width="3"/>
+                
+                <!-- Data Points -->
+                <circle cx="0" cy="250" r="6" class="data-point" fill="var(--primary-color)"/>
+                <circle cx="100" cy="200" r="6" class="data-point" fill="var(--primary-color)"/>
+                <circle cx="200" cy="150" r="6" class="data-point" fill="var(--primary-color)"/>
+                <circle cx="300" cy="100" r="6" class="data-point" fill="var(--primary-color)"/>
+                <circle cx="400" cy="50" r="6" class="data-point" fill="var(--primary-color)"/>
+              </g>
               
-              <!-- Data points and connections -->
-              <circle cx="65" cy="190" r="4" fill="white"/>
-              <circle cx="115" cy="150" r="4" fill="white"/>
-              <circle cx="165" cy="130" r="4" fill="white"/>
-              <circle cx="215" cy="170" r="4" fill="white"/>
-              <circle cx="265" cy="110" r="4" fill="white"/>
-              
-              <polyline points="65,190 115,150 165,130 215,170 265,110" 
-                        stroke="white" stroke-width="2" fill="none" opacity="0.8"/>
-              
-              <!-- Floating data elements -->
-              <circle cx="320" cy="60" r="8" fill="white" opacity="0.7">
-                <animate attributeName="cy" values="60;50;60" dur="3s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="340" cy="90" r="6" fill="white" opacity="0.6">
-                <animate attributeName="cy" values="90;80;90" dur="2.5s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="360" cy="70" r="5" fill="white" opacity="0.5">
-                <animate attributeName="cy" values="70;60;70" dur="2s" repeatCount="indefinite"/>
-              </circle>
-            </svg>
-            <p>Data Visualization</p>
-          </div>
+              <!-- Floating Elements -->
+              <g class="floating-elements">
+                <rect x="50" y="50" width="40" height="40" rx="8" class="float-item" fill="var(--primary-color)" opacity="0.2"/>
+                <circle cx="350" cy="150" r="25" class="float-item" fill="var(--primary-color)" opacity="0.2"/>
+                <path d="M250,200 L270,180 L290,200 L270,220 Z" class="float-item" fill="var(--primary-color)" opacity="0.2"/>
+              </g>
+            </g>
+          </svg>
         </div>
        </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- About Me Section -->
   <section id="about" class="section">
     <div class="container">
-      <div class="section-content">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    About Me
+                </h2>
+            </div>
+            <div class="about-content">
           <p>
-            I'm a motivated Data Analyst with hands-on experience in IoT systems, AI chatbot development, and business dashboards.
-            Skilled in Python, SQL, Power BI, Tableau, and Git — I build data-powered tools to solve real-world problems and drive decisions.
+            As a dedicated Data Analyst, I bring a unique combination of analytical expertise and technical proficiency to every project. My professional journey encompasses hands-on experience in IoT systems development, AI implementation, and advanced data visualization.
           </p>
+          <p>
+            With strong foundations in Python, SQL, Power BI, and Tableau, I specialize in transforming complex datasets into actionable insights. My experience extends to developing IoT healthcare solutions, implementing machine learning models, and creating interactive business intelligence dashboards that drive data-informed decision-making.
+          </p>
+          <p>
+            I am particularly passionate about leveraging emerging technologies to solve real-world challenges. My work in patient health monitoring systems and agricultural IoT solutions demonstrates my commitment to creating meaningful impact through technology. I consistently strive to stay ahead of industry trends and embrace new tools that enhance data analysis capabilities.
+          </p>
+          <div class="skills-section">
+            <h3>Technical Skills:</h3>
+            <ul>
+              <li>Data Analysis & Visualization: Power BI, Tableau, Python (Pandas, NumPy)</li>
+              <li>Programming: Python, SQL</li>
+              <li>IoT Development: Arduino, Raspberry Pi, Sensors Integration</li>
+              <li>Visual Studio Code, Jupyter Notebook</li>
+              <li>Version Control: Git, GitHub</li>
+              <li>Database: PostgresSQL, MongoDB</li>
+            </ul>
+          </div>
         </div>
-      </div>
+        </div>
     </div>
   </section>
 
   <!-- Projects Section -->
   <section id="projects" class="section">
     <div class="container">
-      <div class="section-content">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-icon">
-              <i class="fas fa-heartbeat"></i>
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-code-branch"></i>
+                    Projects
+                </h2>
             </div>
-            <h3>IoT Patient Health Monitoring</h3>
-            <p>Real-time monitoring system for bedridden patients using IoT, improving emergency response time by 40%.</p>
-            <div class="project-links">
-              <a href="https://github.com/snipergib/Smart-IoT-based-remote-patient-health-monitoring-system.git" class="project-link" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i> View Code
-              </a>
+            
+            <div class="projects-grid">
+                <!-- Project 1: Data Analysis -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>IoT Patient Health Monitoring</h3>
+                    <p>Real-time monitoring system for bedridden patients using IoT, improving emergency response time by 40%.</p>
+                    <div class="project-links">
+                      <a href="https://github.com/snipergib/Smart-IoT-based-remote-patient-health-monitoring-system.git" class="project-link" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> View Code
+                      </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: IoT -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>AI Chatbot (In-Development)</h3>
+                    <p>Conversational chatbot using Gemini API, featuring real-time NLP and a custom UI/UX front-end.</p>
+                    <div class="project-links">
+                      <a href="https://github.com/snipergib/Ai_ChatBot.git" class="project-link" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> View Code
+                      </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Machine Learning -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Intelligent Crop Monitoring System</h3>
+                    <p>Python + Power BI + IoT sensors to predict crop health, reduce waste, and visualize trends via dashboards.</p>
+                    <div class="project-links">
+                      <a href="https://github.com/snipergib/IntelligentCropMonitoringSystem.git" class="project-link" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> View Code
+                      </a>
+                    </div>
+                </div>
             </div>
-          </article>
-          
-          <article class="project-card">
-            <div class="project-icon">
-              <i class="fas fa-robot"></i>
-            </div>
-            <h3>AI Chatbot (Ongoing)</h3>
-            <p>Conversational chatbot using Gemini API, featuring real-time NLP and a custom UI/UX front-end.</p>
-            <div class="project-links">
-              <a href="https://github.com/snipergib/Ai_ChatBot.git" class="project-link" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i> View Code
-              </a>
-            </div>
-          </article>
-          
-          <article class="project-card">
-            <div class="project-icon">
-              <i class="fas fa-seedling"></i>
-            </div>
-            <h3>Intelligent Crop Monitoring System</h3>
-            <p>Python + Power BI + IoT sensors to predict crop health, reduce waste, and visualize trends via dashboards.</p>
-            <div class="project-links">
-              <a href="https://github.com/snipergib/IntelligentCropMonitoringSystem.git" class="project-link" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i> View Code
-              </a>
-            </div>
-          </article>
         </div>
-      </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Contact Section - Email icon -->
   <section id="contact" class="section">
     <div class="container">
-      <div class="section-content">
-        <h2 class="section-title">Get in Touch</h2>
-        <p class="section-subtitle">Fill out the form below and I'll get back to you!</p>
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-envelope"></i>
+                    Get in Touch
+                </h2>
+            </div>
+            <p class="section-subtitle">Fill out the form below and I'll get back to you!</p>
 
-        <div id="success-message" class="success-message">
-          <i class="fas fa-check-circle"></i> Thank you for your message! I'll get back to you soon.
+            <div id="success-message" class="success-message">
+              <i class="fas fa-check-circle"></i> Thank you for your message! I'll get back to you soon.
+            </div>
+
+            <!-- Update the form action -->
+            <form id="contact-form" class="contact-form" aria-label="Contact Form" action="/thank-you" method="POST">
+              <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
+              <input type="email" name="email" placeholder="Your Email" required aria-label="Email">
+              <textarea name="message" placeholder="Your Message" rows="5" required aria-label="Message"></textarea>
+
+              <button type="submit" class="btn primary">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
         </div>
-
-        <!-- Update the form action -->
-        <form id="contact-form" class="contact-form" aria-label="Contact Form" action="/thank-you" method="POST">
-          <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
-          <input type="email" name="email" placeholder="Your Email" required aria-label="Email">
-          <textarea name="message" placeholder="Your Message" rows="5" required aria-label="Message"></textarea>
-
-          <button type="submit" class="btn primary">
-            <i class="fas fa-paper-plane"></i> Send Message
-          </button>
-        </form>
-      </div>
     </div>
   </section>
 
