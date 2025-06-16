@@ -110,6 +110,7 @@ function stopTyping() {
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('.section');
 
+// Update the showSection function
 function showSection(targetId) {
   if (!targetId) return;
   
@@ -120,15 +121,18 @@ function showSection(targetId) {
   const activeLink = document.querySelector(`[href="#${targetId}"]`);
   if (activeLink) {
     activeLink.classList.add('active');
-  }
-  
-  // Scroll to section
-  const targetSection = document.getElementById(targetId);
-  if (targetSection) {
-    targetSection.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
+    
+    // Scroll to section with offset for header height
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+      const headerHeight = document.querySelector('.header').offsetHeight;
+      const targetPosition = targetSection.offsetTop - headerHeight;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
   }
 }
 
@@ -162,12 +166,13 @@ function handlePageExit(href) {
 // Intersection Observer for active navigation
 function updateActiveNav(entries) {
   entries.forEach(entry => {
-    if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+    if (entry.isIntersecting) {
       const id = entry.target.id;
-      if (id && AppState.currentSection !== id) {
+      if (id) {
         AppState.currentSection = id;
         navLinks.forEach(link => {
-          const isActive = link.getAttribute('href') === `#${id}`;
+          const href = link.getAttribute('href');
+          const isActive = href === `#${id}`;
           link.classList.toggle('active', isActive);
         });
       }
@@ -499,18 +504,20 @@ function initializeObservers() {
   const sections = document.querySelectorAll('.section');
   
   if (sections.length > 0) {
-    const activeObserver = createIntersectionObserver(updateActiveNav);
-    const sectionObserver = createIntersectionObserver(animateSectionEntry, {
+    const activeObserver = new IntersectionObserver(updateActiveNav, {
+      threshold: 0.2, // Reduced threshold for earlier detection
+      rootMargin: '-100px 0px -50px 0px' // Adjusted rootMargin to account for header
+    });
+    
+    const sectionObserver = new IntersectionObserver(animateSectionEntry, {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
     });
     
-    if (activeObserver && sectionObserver) {
-      sections.forEach(section => {
-        activeObserver.observe(section);
-        sectionObserver.observe(section);
-      });
-    }
+    sections.forEach(section => {
+      activeObserver.observe(section);
+      sectionObserver.observe(section);
+    });
   }
 }
 
@@ -521,17 +528,14 @@ function setupEventListeners() {
     themeToggle.addEventListener('click', toggleTheme);
   }
   
-  // Navigation links with fade exit for external pages
-  navLinks.forEach(link => {
+  // Navigation links with improved handling
+  document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const href = link.getAttribute('href');
-      if (href && href.startsWith("#")) {
-        // In-page scroll
-        showSection(href.substring(1));
-      } else if (href) {
-        // External page (like thank-you.ejs)
-        handlePageExit(href);
+      if (href && href.startsWith('#')) {
+        const targetId = href.substring(1);
+        showSection(targetId);
       }
     });
   });

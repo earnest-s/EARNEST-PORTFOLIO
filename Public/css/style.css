@@ -92,6 +92,7 @@ body {
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
   transition: all 0.3s ease;
+  height: 70px; /* Add fixed height */
 }
 
 [data-theme="dark"] .header {
@@ -158,12 +159,13 @@ body {
   color: var(--primary-color);
 }
 
-/* Sections */
+/* Update section styles */
 .section {
   min-height: 100vh;
   padding: 100px 0 50px;
   display: block;
-  background: transparent; /* Update section backgrounds to be transparent */
+  background: transparent;
+  scroll-margin-top: 80px; /* Add scroll margin to account for fixed header */
 }
 
 .section.active {
@@ -257,6 +259,12 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Add smooth scrolling to html */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px; /* Match header height */
 }
 
 /* Responsive adjustments */
