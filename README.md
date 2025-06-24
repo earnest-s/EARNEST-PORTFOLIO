@@ -1,11 +1,6 @@
-Thank you! I’ll generate a professional README file for the EARNEST-PORTFOLIO repository. This portfolio showcases web development and academic projects and is built using Node.js. I’ll review the code and include a clean overview, setup instructions, and key project highlights.
-
-I’ll let you know once it’s ready.
-
-
 # EARNEST-PORTFOLIO
 
-## Project Overview
+## Portfolio Overview
 
 **EARNEST-PORTFOLIO** is a Node.js–based web application serving as a professional portfolio site. Its purpose is to showcase the creator’s web development and academic projects online. An online portfolio is generally “a website you create to show off your skills, experience, projects”, which is exactly what this project does. Under the hood, this app runs on **Node.js**, the free, open-source, cross-platform JavaScript runtime for building web servers and apps. The project likely uses a Node-based web framework (such as Express) to serve pages dynamically and manage routing.
 
