@@ -6,9 +6,9 @@
   <title>S. Earnest | Portfolio</title>
 
   <!-- SEO -->
-  <meta name="description" content="Portfolio of Earnest S. - Data Analyst with expertise in IoT, AI, and data visualization.">
+  <meta name="description" content="Portfolio of Earnest S - Data Analyst with expertise in IoT, AI, and data visualization.">
   <meta name="keywords" content="Earnest, Data Analyst, AI, IoT, Python, Power BI, Portfolio, SQL, Projects">
-  <meta name="author" content="Earnest S.">
+  <meta name="author" content="Earnest S">
 
   <!-- Favicon -->
   <link rel="icon" href="/assets/favicon.ico?v=2" type="image/x-icon" />
@@ -32,10 +32,11 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <h1 class="logo">Earnest S.</h1>
+      <h1 class="logo">Earnest S</h1>
       <nav class="nav">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Technical Skills</a> <!-- Added navbar link -->
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#contact" class="nav-link">Contact</a>
         <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
@@ -56,7 +57,7 @@
             <!-- Add the photo container here -->
             <div class="profile-photo-container">
               <div class="profile-photo-frame">
-                <img src="/assets/earnest-photo.jpg" alt="Earnest S." class="profile-photo">
+                <img src="/assets/earnest-photo.jpg" alt="Earnest S" class="profile-photo">
               </div>
             </div>
             
@@ -128,14 +129,14 @@
   <!-- About Me Section -->
   <section id="about" class="section">
     <div class="container">
-        <div class="section-content">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-user"></i>
-                    About Me
-                </h2>
-            </div>
-            <div class="about-content">
+      <div class="section-content">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-user"></i>
+            About Me
+          </h2>
+        </div>
+        <div class="about-content">
           <p>
             As a dedicated Data Analyst, I bring a unique combination of analytical expertise and technical proficiency to every project. My professional journey encompasses hands-on experience in IoT systems development, AI implementation, and advanced data visualization.
           </p>
@@ -145,21 +146,101 @@
           <p>
             I am particularly passionate about leveraging emerging technologies to solve real-world challenges. My work in patient health monitoring systems and agricultural IoT solutions demonstrates my commitment to creating meaningful impact through technology. I consistently strive to stay ahead of industry trends and embrace new tools that enhance data analysis capabilities.
           </p>
-          <div class="skills-section">
-            <h3>Technical Skills:</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section (separated from About Me) -->
+  <section id="skills" class="section">
+  <div class="container">
+    <div class="section-content">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-tools"></i>
+          Technical Skills
+        </h2>
+      </div>
+      <!-- Technical Skills Tabs -->
+      <div class="skills-tabs">
+        <button class="skills-tab active" data-category="all"><i class="fas fa-th-large"></i> All</button>
+        <button class="skills-tab" data-category="data"><i class="fas fa-chart-bar"></i> Data & Analytics</button>
+        <button class="skills-tab" data-category="dev"><i class="fas fa-code"></i> Development</button>
+        <button class="skills-tab" data-category="devops"><i class="fas fa-server"></i> DevOps</button>
+        <button class="skills-tab" data-category="tools"><i class="fas fa-toolbox"></i> Tools</button>
+      </div>
+      <div class="skills-section skills-grid">
+        <!-- Data & Analytics -->
+        <div class="skill-box" data-category="data">
+          <i class="fas fa-chart-line skill-icon"></i>
+          <div>
+            <strong>Data Analysis & Visualization</strong>
             <ul>
-              <li>Data Analysis & Visualization: Power BI, Tableau, Python (Pandas, NumPy)</li>
-              <li>Programming: Python, SQL</li>
-              <li>IoT Development: Arduino, Raspberry Pi, Sensors Integration</li>
-              <li>Visual Studio Code, Jupyter Notebook</li>
-              <li>Version Control: Git, GitHub</li>
-              <li>Database: PostgresSQL, MongoDB</li>
+              <li>Power BI</li>
+              <li>Tableau</li>
+              <li>Python (Pandas, NumPy)</li>
+              <li>Matplotlib</li>
             </ul>
           </div>
         </div>
+        <!-- Development -->
+        <div class="skill-box" data-category="dev">
+          <i class="fas fa-code skill-icon"></i>
+          <div>
+            <strong>Programming</strong>
+            <ul>
+              <li>Python</li>
+              <li>SQL</li>
+            </ul>
+          </div>
         </div>
+        <div class="skill-box" data-category="dev">
+          <i class="fas fa-microchip skill-icon"></i>
+          <div>
+            <strong>IoT Development</strong>
+            <ul>
+              <li>Arduino</li>
+              <li>Raspberry Pi</li>
+              <li>Sensors Integration</li>
+            </ul>
+          </div>
+        </div>
+        <!-- DevOps -->
+        <div class="skill-box" data-category="devops">
+          <i class="fas fa-database skill-icon"></i>
+          <div>
+            <strong>Database</strong>
+            <ul>
+              <li>PostgreSQL</li>
+              <li>MongoDB</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skill-box" data-category="devops">
+          <i class="fab fa-git-alt skill-icon"></i>
+          <div>
+            <strong>Version Control</strong>
+            <ul>
+              <li>Git</li>
+              <li>GitHub</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Tools -->
+        <div class="skill-box" data-category="tools">
+          <i class="fas fa-laptop-code skill-icon"></i>
+          <div>
+            <strong>Tools</strong>
+            <ul>
+              <li>Visual Studio Code</li>
+              <li>Jupyter Notebook</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Projects Section -->
   <section id="projects" class="section">
@@ -252,7 +333,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 <strong>Earnest S.</strong>. All rights reserved.</p>
+      <p>&copy; 2025 <strong>Earnest S</strong>. All rights reserved.</p>
     </div>
   </footer>
 </body>

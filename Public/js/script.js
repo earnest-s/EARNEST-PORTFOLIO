@@ -729,6 +729,26 @@ function initializeGSAPAnimations() {
   }
 }
 
+// Skills Tabs Filtering
+document.addEventListener('DOMContentLoaded', function () {
+  const tabs = document.querySelectorAll('.skills-tab');
+  const skillBoxes = document.querySelectorAll('.skill-box');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function () {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.getAttribute('data-category');
+      skillBoxes.forEach(box => {
+        if (cat === 'all' || box.getAttribute('data-category') === cat) {
+          box.style.display = 'flex';
+        } else {
+          box.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+
 // Initialize application
 function initializeApp() {
   console.log('Initializing application...');
