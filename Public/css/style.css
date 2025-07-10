@@ -1032,13 +1032,18 @@ html {
 /* Responsive Design */
 @media (max-width: 768px) {
   .nav {
-    gap: 20px;
+    display: none;
   }
   
-  .nav-link {
-    font-size: 0.9rem;
+  .nav-toggle {
+    display: block;
   }
-  
+  .mobile-nav {
+    display: none;
+  }
+  .mobile-nav.open {
+    display: flex;
+  }
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1331,5 +1336,102 @@ svg {
   .profile-photo-frame {
     width: 120px;
     height: 120px;
+  }
+}
+
+/* Add to your style.css */
+
+/* Hide mobile nav and hamburger by default */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  z-index: 1101;
+}
+
+/* --- Compact and accent mobile nav --- */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background: var(--bg-secondary);
+  z-index: 1100;
+  padding: 0.5rem 0 0.5rem 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  text-align: center;
+  border-radius: 0 0 16px 16px;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+.mobile-nav .nav-link {
+  padding: 0.7rem 0;
+  font-size: 1.08rem;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color); /* Accent line for all */
+  margin: 0 1.5rem;
+  background: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mobile-nav .nav-link:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav .nav-link.active,
+.mobile-nav .nav-link:focus,
+.mobile-nav .nav-link:hover {
+  background: rgba(220,38,38,0.07);
+  color: #fff;
+}
+
+.mobile-nav .theme-btn {
+  margin: 0.7rem auto 0.2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.mobile-nav-close {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.7rem;
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  cursor: pointer;
+  z-index: 1200;
+}
+
+.mobile-nav.open {
+  display: flex;
+  animation: fadeInDown 0.25s;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .mobile-nav {
+    display: none;
+  }
+  .mobile-nav.open {
+    display: flex;
   }
 }

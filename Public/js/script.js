@@ -747,6 +747,36 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+  
+  // Mobile nav toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  const mobileNavClose = document.getElementById('mobile-nav-close');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const themeToggle = document.getElementById('theme-toggle');
+
+  if (navToggle && mobileNav) {
+    navToggle.addEventListener('click', function () {
+      mobileNav.classList.toggle('open');
+    });
+    // Close mobile nav on link click
+    mobileNav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+      });
+    });
+  }
+  if (mobileNavClose && mobileNav) {
+    mobileNavClose.addEventListener('click', function () {
+      mobileNav.classList.remove('open');
+    });
+  }
+  // Sync theme toggle in mobile menu
+  if (mobileThemeToggle && themeToggle) {
+    mobileThemeToggle.addEventListener('click', function () {
+      themeToggle.click();
+    });
+  }
 });
 
 // Initialize application
