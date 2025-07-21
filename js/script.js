@@ -221,50 +221,33 @@ function handleFormSubmission(e) {
   button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
   button.disabled = true;
   
-  // Create and submit form directly
-  const submitForm = document.createElement('form');
-  submitForm.method = 'POST';
-  submitForm.action = 'https://formsubmit.co/earni8105@gmail.com';
-  submitForm.style.display = 'none';
+  // Do NOT submit the form to FormSubmit or redirect
+  // Just show glassmorphism popup
+  showGlassPopup('Thank you! I will reach you soon.');
   
-  // Add form data
-  for (const [key, value] of formData.entries()) {
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = key;
-    input.value = value;
-    submitForm.appendChild(input);
-  }
-  
-  // Add FormSubmit configuration
-  const nextInput = document.createElement('input');
-  nextInput.type = 'hidden';
-  nextInput.name = '_next';
-  nextInput.value = window.location.origin + '/thank-you';
-  submitForm.appendChild(nextInput);
-  
-  const captchaInput = document.createElement('input');
-  captchaInput.type = 'hidden';
-  captchaInput.name = '_captcha';
-  captchaInput.value = 'false';
-  submitForm.appendChild(captchaInput);
-  
-  const subjectInput = document.createElement('input');
-  subjectInput.type = 'hidden';
-  subjectInput.name = '_subject';
-  subjectInput.value = 'New Portfolio Contact Form Submission';
-  submitForm.appendChild(subjectInput);
-  
-  // Submit form
-  document.body.appendChild(submitForm);
-  submitForm.submit();
-  
-  // Clean up
+  // Reset form and button after a short delay
   setTimeout(() => {
-    if (submitForm.parentNode) {
-      submitForm.remove();
-    }
-  }, 1000);
+    button.innerHTML = originalText;
+    button.disabled = false;
+    form.reset();
+  }, 2000);
+}
+
+// Glassmorphism popup function
+function showGlassPopup(message) {
+  // Remove any existing popup
+  const existing = document.querySelector('.glass-popup');
+  if (existing) existing.remove();
+
+  const popup = document.createElement('div');
+  popup.className = 'glass-popup';
+  popup.innerHTML = `<span class="popup-icon"><i class="fas fa-check-circle"></i></span> ${message}`;
+  document.body.appendChild(popup);
+  setTimeout(() => popup.classList.add('show'), 10);
+  setTimeout(() => {
+    popup.classList.remove('show');
+    setTimeout(() => popup.remove(), 400);
+  }, 3000);
 }
 
 // Email validation
@@ -673,7 +656,7 @@ function initializeGSAPAnimations() {
         },
         opacity: 0,
         y: 50,
-        duration: 1,
+        duration: 0.3, // Even faster animation
         ease: "power2.out"
       });
     });
@@ -1028,6 +1011,21 @@ function createScrollIndicator() {
         duration: 0.3,
         ease: "power2.out"
       });
+    }
+  });
+}
+
+// Only animate if .glass-card elements exist
+if (document.querySelector('.glass-card')) {
+  gsap.from('.glass-card', {
+    y: 60,
+    opacity: 0,
+    duration: 0.3, // Even faster animation
+    stagger: 0.05,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: '.glass-card',
+      start: 'top 80%',
     }
   });
 }
