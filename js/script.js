@@ -193,8 +193,8 @@ function animateSectionEntry(entries) {
   });
 }
 
-// Form Handling with Enhanced Security and Debugging
-function handleFormSubmission(e) {
+// Form Handling with Formspree Integration
+async function handleFormSubmission(e) {
   e.preventDefault();
   
   const form = e.target;
@@ -205,6 +205,7 @@ function handleFormSubmission(e) {
   // Rate limiting check
   AppState.formSubmissionAttempts++;
   if (AppState.formSubmissionAttempts > 5) {
+    showGlassPopup('Too many attempts. Please try again later.');
     return;
   }
   
@@ -214,6 +215,7 @@ function handleFormSubmission(e) {
   const message = formData.get('message')?.trim();
   
   if (!name || !email || !message || !isValidEmail(email)) {
+    showGlassPopup('Please fill out all fields correctly.');
     return;
   }
   
@@ -221,16 +223,38 @@ function handleFormSubmission(e) {
   button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
   button.disabled = true;
   
-  // Do NOT submit the form to FormSubmit or redirect
-  // Just show glassmorphism popup
-  showGlassPopup('Thank you! I will reach you soon.');
-  
-  // Reset form and button after a short delay
-  setTimeout(() => {
+  try {
+    // Submit to Formspree
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    if (response.ok) {
+      showGlassPopup('Thank you! Your message has been sent successfully.');
+      form.reset();
+    } else {
+      const data = await response.json();
+      if (data.errors) {
+        showGlassPopup('There was an issue with your submission. Please try again.');
+      } else {
+        showGlassPopup('Thank you! Your message has been sent successfully.');
+        form.reset();
+      }
+    }
+  } catch (error) {
+    console.error('Form submission error:', error);
+    // Fallback to mailto if Formspree fails
+    mailtoFallback(formData);
+    showGlassPopup('Opening your email client as fallback.');
+  } finally {
+    // Reset button state
     button.innerHTML = originalText;
     button.disabled = false;
-    form.reset();
-  }, 2000);
+  }
 }
 
 // Glassmorphism popup function
@@ -256,91 +280,7 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-// Form submission function with multiple fallback methods
-async function submitForm(formData) {
-  console.log('Form submission started...');
-  console.log('Form data:', Object.fromEntries(formData));
-  
-  // Method 1: Try FormSubmit with proper configuration
-  try {
-    console.log('Trying FormSubmit method...');
-    
-    // Create a regular form submission to avoid CORS issues
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://formsubmit.co/earni8105@gmail.com';
-    form.style.display = 'none';
-    
-    // Add all form data as hidden inputs
-    for (const [key, value] of formData.entries()) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = value;
-      form.appendChild(input);
-    }
-    
-    // Add FormSubmit configuration
-    const nextInput = document.createElement('input');
-    nextInput.type = 'hidden';
-    nextInput.name = '_next';
-    nextInput.value = window.location.origin + '/thank-you'; // Remove .ejs extension
-    form.appendChild(nextInput);
-    
-    const captchaInput = document.createElement('input');
-    captchaInput.type = 'hidden';
-    captchaInput.name = '_captcha';
-    captchaInput.value = 'false';
-    form.appendChild(captchaInput);
-    
-    const subjectInput = document.createElement('input');
-    subjectInput.type = 'hidden';
-    subjectInput.name = '_subject';
-    subjectInput.value = 'New Portfolio Contact Form Submission';
-    form.appendChild(subjectInput);
-    
-    document.body.appendChild(form);
-    
-    // Submit the form
-    console.log('Submitting form to FormSubmit...');
-    form.submit();
-    
-    // Clean up
-    setTimeout(() => {
-      if (form.parentNode) {
-        form.remove();
-      }
-    }, 1000);
-    
-    return Promise.resolve();
-    
-  } catch (error) {
-    console.error('FormSubmit method failed:', error);
-    
-    // Method 2: Try fetch with different configuration
-    try {
-      console.log('Trying fetch method...');
-      
-      const response = await fetch('https://formsubmit.co/earni8105@gmail.com', {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors' // This avoids CORS issues but we can't read the response
-      });
-      
-      console.log('Fetch completed (no-cors mode)');
-      return Promise.resolve();
-      
-    } catch (fetchError) {
-      console.error('Fetch method failed:', fetchError);
-      
-      // Method 3: Mailto fallback
-      console.log('Using mailto fallback...');
-      return mailtoFallback(formData);
-    }
-  }
-}
-
-// Mailto fallback function
+// Mailto fallback function (used when Formspree fails)
 function mailtoFallback(formData) {
   console.log('Creating mailto link...');
   
@@ -359,23 +299,7 @@ function mailtoFallback(formData) {
   const mailtoLink = `mailto:earni8105@gmail.com?subject=${subject}&body=${body}`;
   
   // Try to open mailto
-  const link = document.createElement('a');
-  link.href = mailtoLink;
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  
-  try {
-    link.click();
-    console.log('Mailto link opened');
-    return Promise.resolve();
-  } catch (error) {
-    console.error('Mailto failed:', error);
-    return Promise.reject(new Error('All submission methods failed'));
-  } finally {
-    if (link.parentNode) {
-      link.remove();
-    }
-  }
+  window.open(mailtoLink, '_self');
 }
 
 // Show form message
@@ -1029,3 +953,39 @@ if (document.querySelector('.glass-card')) {
     }
   });
 }
+
+// Hire Me Button Handler
+function initializeHireMeButton() {
+  const hireMeBtn = document.querySelector('.hire-btn');
+  if (hireMeBtn) {
+    hireMeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const email = 'earni8105@gmail.com';
+      const subject = 'Hire Request - Portfolio';
+      const body = `Hi Earnest,
+
+I am interested in discussing a potential opportunity with you.
+
+Best regards,`;
+      
+      // Create the mailto URL
+      const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      
+      // Try to open the mailto link
+      try {
+        window.location.href = mailtoUrl;
+      } catch (error) {
+        // Fallback: copy email to clipboard and show message
+        navigator.clipboard.writeText(email).then(() => {
+          showGlassPopup('Email address copied to clipboard: ' + email);
+        }).catch(() => {
+          showGlassPopup('Please email me at: ' + email);
+        });
+      }
+    });
+  }
+}
+
+// Initialize hire me button when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeHireMeButton);
