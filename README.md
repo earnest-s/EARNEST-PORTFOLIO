@@ -2,72 +2,76 @@
 
 ## Portfolio Overview
 
-**EARNEST-PORTFOLIO** is a Node.js–based web application serving as a professional portfolio site. Its purpose is to showcase the creator’s web development and academic projects online. An online portfolio is generally “a website you create to show off your skills, experience, projects”, which is exactly what this project does. Under the hood, this app runs on **Node.js**, the free, open-source, cross-platform JavaScript runtime for building web servers and apps. The project likely uses a Node-based web framework (such as Express) to serve pages dynamically and manage routing.
+**EARNEST-PORTFOLIO** is a simple yet professional **HTML, CSS, and JavaScript** portfolio website. It serves as an online showcase for the creator’s web development and academic projects. A portfolio website helps demonstrate skills, experience, and completed projects to potential employers and collaborators.
+
+This portfolio focuses on a **clean design, responsive layout, and easy navigation**, making it accessible across desktop, tablet, and mobile devices.
 
 ## Features
 
-* **Project Showcase:** Each web development or academic project has its own page or section with descriptions and links to demos or code. (Standard portfolio practice is to highlight projects with context and visuals.)
-* **Responsive Design:** The site is fully responsive, ensuring it works well on desktop, tablet, and mobile devices. Modern portfolios should adapt to all screen sizes.
-* **Downloadable Resume:** A link or button allows visitors to download a PDF resume. Providing a “downloadable resume” and clear calls-to-action (e.g. “Hire Me” or resume link) is a common portfolio feature.
-* **Contact/Call-to-Action:** The site includes easy-to-find contact information or a contact form so that potential employers or clients can reach out. It’s important to make contact info visible and accessible. (Often there is a “Contact Me” form or email link.)
-* **Clean UI:** The interface uses modern HTML/CSS styling (possibly a CSS framework or custom styles) and intuitive navigation. The focus is on clear communication and usability rather than flashy animations.
+* **Project Showcase:** Each project has its own section with descriptions, visuals, and links to live demos or code repositories.
+* **Responsive Design:** Built with modern CSS (Flexbox/Grid), the site adapts seamlessly to any screen size.
+* **Downloadable Resume:** Visitors can easily download a PDF copy of the resume.
+* **Contact/Call-to-Action:** Includes a contact form and/or email link for direct communication.
+* **Clean UI:** Minimalist and modern design for clarity and professionalism.
+
+👉 **Live Demo:** [https://earnest.qzz.io](https://earnest.qzz.io)
 
 ## Technologies Used
 
-This project is built with a typical Node.js/Express web stack:
+This project is built using standard web technologies:
 
-* **Node.js:** A JavaScript runtime for building the server-side of the app.
-* **Express.js:** A minimal, fast Node.js web application framework for handling routing and HTTP requests.
-* **Templating Engine:** (Likely something like Handlebars or EJS.) These engines render dynamic HTML pages on the server. For example, many Node portfolios use **Express-Handlebars** or **EJS** for templates.
-* **HTML5 & CSS3 (Sass):** Standard web markup and styling languages. The project may use **Sass** (a CSS preprocessor) for organized stylesheets, and modern layout techniques (Flexbox/Grid).
-* **JavaScript (ES6+):** Client-side scripts for interactivity and dynamic behaviors.
-* **npm (Node Package Manager):** To install and manage project dependencies.
-* **Development Tools:** (Often a tool like **nodemon** is used for auto-reloading during development.)
+* **HTML5:** Structure and semantic markup.
+* **CSS3 (Flexbox/Grid):** Styling and responsive layouts.
+* **JavaScript (ES6+):** Interactivity and dynamic elements.
+* **Fonts & Icons:** Google Fonts, Font Awesome (or similar) for polished visuals.
 
-These technologies (Node.js with Express, plus a templating engine and CSS preprocessor) form the foundation of many developer portfolios.
+No frameworks or server-side technologies are required — it’s a static site that can be hosted anywhere.
 
 ## Setup and Installation
 
-1. **Install Node.js:** Ensure you have Node.js (LTS version) installed on your system. You can download the LTS installer from the [official Node.js site](https://nodejs.org).
-2. **Clone the Repository:** In your terminal, run:
+1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/snipergib/EARNEST-PORTFOLIO.git
    cd EARNEST-PORTFOLIO
    ```
-3. **Install Dependencies:** Inside the project folder, install required packages:
 
-   ```bash
-   npm install
-   ```
-4. **Run the App:** Start the application (often using a dev script or simply `npm start`):
+2. **Open in Browser:**
+   Simply open the `index.html` file in your browser to view the site locally.
 
-   ```bash
-   node server.js
-   ```
-
-   This will launch the server locally (e.g. on `http://localhost:3000`). The above steps (clone, `npm install`, `npm run dev` or `node server.js`) follow standard Node.js setup instructions.
+   (Optional: You can also use a local server such as VS Code’s **Live Server** extension for development.)
 
 ## Deployment / Hosting Guidelines
 
-The app can be deployed to any Node.js–compatible hosting environment. Typical approaches include using services like **Heroku**, **AWS Elastic Beanstalk**, **DigitalOcean App Platform**, or similar platforms that support Node.js. You will generally need to set up a hosting account and (optionally) a custom domain name for the portfolio – for example, using providers like Bluehost, Kinsta, or Netlify (with serverless functions). In deployment, ensure environment variables (if any) and the `start` script in `package.json` are configured. In short, deploy it like any web app: push the code to a server with Node.js installed, install dependencies, and run the start script. (Refer to Node.js deployment guides for details.)
+Since this is a static site, it can be hosted on any static hosting service. Popular options include:
 
-## Folder Structure (Project Architecture)
+* **GitHub Pages**
+* **Netlify**
+* **Vercel**
+* **Cloudflare Pages**
 
-The project follows a common Node/Express layout. For example, one can expect:
+In this project, the live site is already deployed at:
+👉 [https://earnest.qzz.io](https://earnest.qzz.io)
 
-* `app.js` (or `server.js`): Main application entry point (sets up Express, middleware, and routes).
-* `package.json`: Project metadata and dependency list.
-* `public/`: Static assets (CSS, JavaScript, images) served to the browser.
-* `routes/`: Express route handler files (defines how URLs map to code).
-* `views/`: Template files (e.g. `.hbs` or `.ejs` files) for rendering HTML.
-* (Optionally `helpers/`, `config/`, or others for organization.)
+## Folder Structure
 
-This mirrors typical Express project structures. For example, similar portfolios include folders like `public/`, `views/`, and `routes/` along with the main `app.js`.
+A typical static portfolio project structure:
+
+* `index.html` – Main portfolio page.
+* `style.css` – Core stylesheet.
+* `script.js` – JavaScript for interactivity.
+* `assets/` – Images, fonts, icons, and other static resources.
+* `resume.pdf` – Downloadable resume file.
 
 ## Contribution Guidelines
 
-Contributions are welcome! To contribute:
+Contributions are welcome!
 
 * **Issues & Features:** Report bugs or request features by opening an issue on GitHub.
-* **Communication:** We appreciate clear, concise contributions. Feel free to reach out via GitHub issues if you need guidance or have questions.
+* **Pull Requests:** Fork the repo, create a branch, make your changes, and submit a PR.
+* **Communication:** For guidance, use the GitHub issues section.
+
+---
+
+🔗 GitHub Repository: [https://github.com/snipergib/EARNEST-PORTFOLIO](https://github.com/snipergib/EARNEST-PORTFOLIO)
+🔗 Live Demo: [https://earnest.qzz.io](https://earnest.qzz.io)
