@@ -989,3 +989,61 @@ Best regards,`;
 
 // Initialize hire me button when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeHireMeButton);
+
+// Certificate PDF Functions - Updated
+function openCertificatePDF(pdfPath) {
+  const modal = document.getElementById('certificate-modal');
+  const pdfViewer = document.getElementById('certificate-pdf-viewer');
+  
+  modal.style.display = 'block';
+  
+  // Use PDF.js embed with custom parameters to hide controls
+  const pdfUrl = pdfPath + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+  pdfViewer.src = pdfUrl;
+  
+  // Prevent body scroll when modal is open
+  document.body.style.overflow = 'hidden';
+  
+  // Add fade-in animation
+  modal.style.opacity = '0';
+  requestAnimationFrame(() => {
+    modal.style.transition = 'opacity 0.3s ease';
+    modal.style.opacity = '1';
+  });
+}
+
+function closeCertificateModal() {
+  const modal = document.getElementById('certificate-modal');
+  const pdfViewer = document.getElementById('certificate-pdf-viewer');
+  
+  // Add fade-out animation
+  modal.style.transition = 'opacity 0.3s ease';
+  modal.style.opacity = '0';
+  
+  setTimeout(() => {
+    modal.style.display = 'none';
+    pdfViewer.src = '';
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+  }, 300);
+}
+
+// Close modal when clicking outside or pressing Escape
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('certificate-modal');
+  
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+      closeCertificateModal();
+    }
+  });
+  
+  // Prevent modal from closing when clicking on the PDF content
+  const modalContent = document.querySelector('.certificate-modal-content');
+  if (modalContent) {
+    modalContent.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
+});
