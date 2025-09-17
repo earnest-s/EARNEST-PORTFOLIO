@@ -341,32 +341,6 @@ function showFormMessage(message, type = 'info') {
   }
 }
 
-// Scroll to Top Button
-let scrollTopBtn = null;
-
-function createScrollTopButton() {
-  if (scrollTopBtn) return;
-  
-  scrollTopBtn = document.createElement('button');
-  scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-  scrollTopBtn.className = 'scroll-top-btn';
-  scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
-  scrollTopBtn.style.display = 'none';
-  
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  
-  document.body.appendChild(scrollTopBtn);
-}
-
-function handleScroll() {
-  if (!scrollTopBtn) return;
-  
-  const shouldShow = window.pageYOffset > 300;
-  scrollTopBtn.style.display = shouldShow ? 'flex' : 'none';
-}
-
 // Keyboard Navigation
 function handleKeyboardNavigation(e) {
   // Handle keyboard navigation for accessibility
@@ -452,9 +426,6 @@ function setupEventListeners() {
   if (contactForm) {
     contactForm.addEventListener('submit', handleFormSubmission);
   }
-  
-  // Scroll events
-  window.addEventListener('scroll', debounce(handleScroll, 16));
   
   // Keyboard navigation
   document.addEventListener('keydown', handleKeyboardNavigation);
@@ -706,8 +677,6 @@ function initializeApp() {
         typeEffect();
       }, 1000);
     }
-    
-    setTimeout(createScrollTopButton, 2000);
   } else {
     initializeThankYouPage();
   }
@@ -1046,4 +1015,122 @@ document.addEventListener('DOMContentLoaded', function() {
       e.stopPropagation();
     });
   }
+});
+
+// Contact Button Spacing - Just update existing contact button styling if needed
+document.addEventListener('DOMContentLoaded', function() {
+  // Update hire me email only
+  const hireMeBtn = document.querySelector('.hire-btn');
+  if (hireMeBtn) {
+    hireMeBtn.removeEventListener('click', hireMeBtn.clickHandler); // Remove existing listener
+    hireMeBtn.clickHandler = function(e) {
+      e.preventDefault();
+      
+      const email = 'contact@earnest.qzz.io';
+      const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+    };
+    hireMeBtn.addEventListener('click', hireMeBtn.clickHandler);
+  }
+});
+
+// Skills Filtering Fix - ADD AT END OF script.js
+document.addEventListener('DOMContentLoaded', function() {
+  // Skills tabs filtering functionality
+  const skillsTabs = document.querySelectorAll('.skills-tab');
+  const skillBoxes = document.querySelectorAll('.skill-box');
+  
+  if (skillsTabs.length > 0 && skillBoxes.length > 0) {
+    skillsTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Remove active class from all tabs
+        skillsTabs.forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tab
+        this.classList.add('active');
+        
+        const category = this.getAttribute('data-category');
+        
+        // Filter skill boxes
+        skillBoxes.forEach(box => {
+          const boxCategory = box.getAttribute('data-category');
+          
+          if (category === 'all' || boxCategory === category) {
+            box.style.display = 'flex';
+            // Add smooth fade-in animation
+            box.style.opacity = '0';
+            box.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              box.style.transition = 'all 0.3s ease';
+              box.style.opacity = '1';
+              box.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            box.style.opacity = '0';
+            box.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+              box.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  }
+
+  // Update hire me button email
+  const hireMeBtn = document.querySelector('.hire-btn');
+  if (hireMeBtn) {
+    hireMeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const email = 'contact@earnest.qzz.io';
+      const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      
+      try {
+        window.location.href = mailtoUrl;
+      } catch (error) {
+        // Fallback for mobile or systems without default email client
+        navigator.clipboard.writeText(email).then(() => {
+          alert('Email address copied to clipboard: ' + email);
+        }).catch(() => {
+          alert('Please email me at: ' + email);
+        });
+      }
+    });
+  }
+});
+
+// Enhanced skills filtering with better centering
+function filterSkills(category) {
+  const skillBoxes = document.querySelectorAll('.skill-box');
+  
+  skillBoxes.forEach(box => {
+    const boxCategory = box.getAttribute('data-category');
+    if (category === 'all' || boxCategory === category) {
+      box.style.display = 'flex';
+    } else {
+      box.style.display = 'none';
+    }
+  });
+}
+
+// Skills tabs functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const skillsTabs = document.querySelectorAll('.skills-tab');
+  
+  skillsTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // Remove active class from all tabs
+      skillsTabs.forEach(t => t.classList.remove('active'));
+      
+      // Add active class to clicked tab
+      this.classList.add('active');
+      
+      // Get category and filter skills
+      const category = this.getAttribute('data-category');
+      filterSkills(category);
+    });
+  });
+  
+  // Initialize with all skills visible
+  filterSkills('all');
 });
